@@ -1,4 +1,3 @@
-
 ;; Requirements
 
 (require 'uniquify)
@@ -7,7 +6,6 @@
 (require 'org-agenda)
 (require 'ielm)
 
-
 ;; Fundamental functions
 
 (defun eval-replacing-region (read)
@@ -321,7 +319,6 @@ prefix argument."
     (erase-buffer)
     (ielm-return)))
 
-
 ;; Global keybindings
 
 (global-set-key [remap paredit-kill] (bol-with-prefix paredit-kill))
@@ -386,7 +383,6 @@ prefix argument."
 (global-set-key (kbd "C-<") 'beginning-of-buffer)
 (global-set-key (kbd "C-!") 'eval-defun)
 
-
 ;; Mode-specific keybindings
 
 (define-key inferior-emacs-lisp-mode-map (kbd "C-c C-k") 'ielm-clear)
@@ -398,12 +394,10 @@ prefix argument."
 (define-key ag-mode-map (kbd "p") 'previous-error-no-select)
 (define-key ag-mode-map (kbd "n") 'next-error-no-select)
 
-
 ;; Disable default settings
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
-(menu-bar-mode -1)
 
 (setq inhibit-startup-message t)
 (setq inhibit-startup-echo-area-message t)
@@ -415,7 +409,6 @@ prefix argument."
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-
 ;; Enable cool modes
 (ido-mode 1)
 (global-font-lock-mode 1)
@@ -424,7 +417,6 @@ prefix argument."
 (setq-default dired-omit-files-p t)
 (setq dired-omit-files "\\.dyn_hi$\\|\\.dyn_o$\\|\\.hi$\\|\\.o$")
 
-
 ;; Enable cool defaults
 
 (show-paren-mode 1)
@@ -434,8 +426,8 @@ prefix argument."
 (transient-mark-mode 1)
 (delete-selection-mode 1)
 (set-auto-saves)
+(global-linum-mode t)
 
-
 ;; Default mode settings
 
 (setq default-major-mode 'text-mode)
@@ -474,7 +466,6 @@ prefix argument."
 
 (setq js-indent-level 2)
 
-
 ;; Global settings
 
 (setq tab-width 2)
@@ -484,7 +475,6 @@ prefix argument."
 
 (setq require-final-newline t)
 
-
 ;; Hooks
 
 (add-hook 'text-mode-hook 'auto-fill-mode)
@@ -496,7 +486,6 @@ prefix argument."
 (add-hook 'ielm-mode-hook 'elisp-slime-nav-mode)
 (add-hook 'minibuffer-setup-hook 'conditionally-enable-paredit-mode)
 
-
 ;; Auto-loads
 
 (add-to-list 'auto-mode-alist (cons "\\.hs\\'" 'haskell-mode))
@@ -510,12 +499,10 @@ prefix argument."
 (add-to-list 'auto-mode-alist (cons "\\.md\\'" 'markdown-mode))
 (add-to-list 'auto-mode-alist (cons "\\.markdown\\'" 'markdown-mode))
 
-
 ;; Environment settings
 
 (set-language-environment "UTF-8")
 
-
 ;; Faces
 
 (custom-set-faces
@@ -544,12 +531,10 @@ prefix argument."
          '(("(\\|)\\|\\[\\|\\]" . 'esk-paren-face))))
       '(emacs-lisp-mode haskell-mode))
 
-
 ;; Uniquify
 
 (setq uniquify-buffer-name-style (quote post-forward-angle-brackets))
 
-
 ;; Safe local variables
 
 (custom-set-variables

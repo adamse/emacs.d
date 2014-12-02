@@ -1,17 +1,13 @@
-
 ;; Standard libraries needed
 
 (require 'cl)
 
-
 ;; Packages and configs to load
 
 (defvar packages
-  '(color-theme
-    zenburn
-    sunburn
-    god-mode
+  '(god-mode
     paredit
+    exec-path-from-shell
     haskell-mode
     smex
     magit
@@ -24,7 +20,7 @@
     echo-keys
     align-by-current-symbol
     ag
-    w3m
+;    w3m
     goto-last-point
     github-urls
     s
@@ -34,7 +30,7 @@
     ats-mode
     multiple-cursors
     projects-mode
-    resmacro
+;    resmacro
     flycheck)
   "Packages whose location follows the
   packages/package-name/package-name.el format.")
@@ -49,6 +45,7 @@
 (defvar configs
   '("global"
     "god"
+    "agda"
     "haskell"
     "erc"
     "email"
@@ -59,7 +56,6 @@
   "Configuration files that follow the config/foo.el file path
   format.")
 
-
 ;; Load packages
 
 (loop for location in custom-load-paths
@@ -78,13 +74,19 @@
                                        (symbol-name name)))
                   (require name))))
 
+(add-to-list 'custom-theme-load-path (concat (file-name-directory (or load-file-name (buffer-file-name))) "packages/color-theme-solarized"))
+
+;; Setup path for OS X
+
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 (require 'shm)
 (require 'hindent)
 (require 'shm-case-split)
 (require 'shm-reformat)
 (require 'w3m-haddock)
 
-
 ;; Emacs configurations
 
 (loop for name in configs
@@ -92,12 +94,11 @@
                        "config/"
                        name ".el")))
 
-
 ;; Mode initializations
 
 (smex-initialize)
-(sunburn)
 (god-mode)
+(load-theme 'solarized-light t)
 (goto-last-point-mode)
 (turn-on-haskell-simple-indent)
-(load "haskell-mode-autoloads.el")
+;(load "haskell-mode-autoloads.el")

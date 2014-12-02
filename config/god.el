@@ -1,4 +1,3 @@
-
 ;; Functions
 
 (defun god-update-cursor ()
@@ -13,7 +12,6 @@
       (god-local-mode-pause)
     (god-local-mode-resume)))
 
-
 ;; Keybindings
 
 (global-set-key (kbd "C-x C-1") 'delete-other-windows)
@@ -26,7 +24,6 @@
 (define-key god-local-mode-map (kbd "[") 'paredit-open-square)
 (define-key god-local-mode-map (kbd "]") 'paredit-close-square)
 
-
 ;; Hooks
 
 (add-hook 'god-mode-enabled-hook 'god-update-cursor)
@@ -34,5 +31,7 @@
 (add-hook 'overwrite-mode-hook 'god-toggle-on-overwrite)
 
 (add-to-list 'god-exempt-major-modes 'message-mode)
+
+(god-local-mode)
 
 (provide 'god)

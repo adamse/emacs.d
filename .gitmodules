@@ -1,6 +1,3 @@
-[submodule "packages/zenburn"]
-	path = packages/zenburn
-	url = https://github.com/chrisdone/zenburn.git
 [submodule "packages/magit"]
 	path = packages/magit
 	url = https://github.com/chrisdone/magit.git
@@ -58,3 +55,9 @@
 [submodule "packages/number"]
 	path = packages/number
 	url = git@github.com:chrisdone/number.git
+[submodule "packages/color-theme-solarized"]
+	path = packages/color-theme-solarized
+	url = https://github.com/sellout/emacs-color-theme-solarized.git
+[submodule "packages/exec-path-from-shell"]
+	path = packages/exec-path-from-shell
+	url = https://github.com/purcell/exec-path-from-shell.git
