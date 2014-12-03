@@ -149,7 +149,7 @@ the cursor position happened."
 ;; Mode settings
 
 (custom-set-variables
- '(haskell-process-type 'ghci)
+ '(haskell-process-type 'cabal-repl)
  '(haskell-process-args-ghci '())
  '(haskell-notify-p t)
  '(haskell-stylish-on-save nil)
@@ -184,12 +184,12 @@ the cursor position happened."
 
 (setq haskell-interactive-mode-eval-mode 'haskell-mode)
 
-(setq haskell-process-path-ghci "ghci")
+(setq haskell-process-path-ghci "ghci-ng")
 
 (setq haskell-process-args-ghci '("-ferror-spans"))
 
 (setq haskell-process-args-cabal-repl
-      '("--ghc-option=-ferror-spans" "--with-ghc=ghci"))
+      '("--ghc-option=-ferror-spans" "--with-ghc=ghci-ng"))
 
 (setq haskell-process-generate-tags nil)
 
