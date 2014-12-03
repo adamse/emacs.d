@@ -60,10 +60,10 @@
 
 (loop for location in custom-load-paths
       do (add-to-list 'load-path
-             (concat (file-name-directory (or load-file-name
-                                              (buffer-file-name)))
-                     "packages/"
-                     location)))
+                      (concat (file-name-directory (or load-file-name
+                                                       (buffer-file-name)))
+                              "packages/"
+                              location)))
 
 (loop for name in packages
       do (progn (unless (fboundp name)
@@ -101,7 +101,7 @@
 (load-theme 'solarized-light t)
 (goto-last-point-mode)
 (turn-on-haskell-simple-indent)
-;(load "haskell-mode-autoloads.el")
+                                        ;(load "haskell-mode-autoloads.el")
 
 
 (custom-set-variables
@@ -127,7 +127,8 @@
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save nil)
  '(hindent-style "chris-done")
- '(safe-local-variable-values (quote ((haskell-indent-spaces . 4) (haskell-indent-spaces . 2) (haskell-process-type . cabal-repl) (shm-lambda-indent-style . leftmost-parent))))
+ '(ns-right-alternate-modifier (quote alt))
+ '(safe-local-variable-values (quote ((haskell-indent-spaces . 2) (haskell-indent-spaces . 2) (haskell-process-type . cabal-repl) (shm-lambda-indent-style . leftmost-parent))))
  '(send-mail-function (quote smtpmail-send-it))
  '(shm-auto-insert-bangs t)
  '(shm-auto-insert-skeletons t)
@@ -139,5 +140,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :height 140 :width normal :family "Menlo"))))
  '(erc-my-nick-face ((t (:foreground "#dca3a3" :weight bold)))))
+
+(set-default-font "-apple-Monaco-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")

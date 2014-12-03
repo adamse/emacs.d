@@ -1,4 +1,3 @@
-
 ;; Requirements
 
 (require 'haskell-mode)
@@ -11,7 +10,6 @@
 (require 'sgml-mode)
 (require 'css-mode)
 
-
 ;; Functions
 
 (defun haskell-interactive-toggle-print-mode ()
@@ -148,7 +146,6 @@ the cursor position happened."
              name
              (line-number-at-pos)))))
 
-
 ;; Mode settings
 
 (custom-set-variables
@@ -187,16 +184,18 @@ the cursor position happened."
 
 (setq haskell-interactive-mode-eval-mode 'haskell-mode)
 
-(setq haskell-process-path-ghci "ghci-ng")
+(setq haskell-process-path-ghci "ghci")
 
 (setq haskell-process-args-ghci '("-ferror-spans"))
 
 (setq haskell-process-args-cabal-repl
-      '("--ghc-option=-ferror-spans" "--with-ghc=ghci-ng"))
+      '("--ghc-option=-ferror-spans" "--with-ghc=ghci"))
 
 (setq haskell-process-generate-tags nil)
 
-
+(set-face-background 'shm-current-face "#eee8d5")
+(set-face-background 'shm-quarantine-face "lemonchiffon")
+
 ;; Add hook
 
 (add-hook 'haskell-mode-hook 'structured-haskell-mode)
@@ -205,7 +204,6 @@ the cursor position happened."
 (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
 (add-hook 'w3m-display-hook 'w3m-haddock-display)
 
-
 ;; Keybindings
 
 (define-key interactive-haskell-mode-map [f5] 'haskell-process-load-or-reload)
