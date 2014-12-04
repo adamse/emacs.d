@@ -1,5 +1,7 @@
 (require 'markdown-mode)
 
+(add-hook 'markdown-mode-hook 'pandoc-mode)
+
 (defvar markdown-code-languages
   '("haskell" "lisp" "javascript" "c"))
 

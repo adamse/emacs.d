@@ -1,5 +1,9 @@
 ;; Requirements
 
+(require 'shm)
+(require 'hindent)
+(require 'shm-case-split)
+(require 'shm-reformat)
 (require 'haskell-mode)
 (require 'hindent)
 (require 'haskell-process)
@@ -149,7 +153,7 @@ the cursor position happened."
 ;; Mode settings
 
 (custom-set-variables
- '(haskell-process-type 'cabal-repl)
+ '(haskell-process-type 'ghci)
  '(haskell-process-args-ghci '())
  '(haskell-notify-p t)
  '(haskell-stylish-on-save nil)
