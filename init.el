@@ -34,7 +34,10 @@
     ats-mode
     multiple-cursors
     projects-mode
-    flycheck)
+    color-theme
+    color-theme-solarized
+    flycheck
+    reveal-in-finder)
   "Packages whose location follows the
   packages/package-name/package-name.el format.")
 
@@ -76,10 +79,6 @@
                                        (symbol-name name)))
                   (require name))))
 
-(add-to-list 'custom-theme-load-path
-             (concat (file-name-directory (or load-file-name (buffer-file-name)))
-                     "packages/color-theme-solarized"))
-
 ;; Install melpa packages
 
 (defun melpa-packages-installed-p ()
@@ -109,10 +108,9 @@
 
 (smex-initialize)
 (god-mode)
-(load-theme 'solarized-light t)
+(color-theme-solarized-light)
 (goto-last-point-mode)
 (turn-on-haskell-simple-indent)
-                                        ;(load "haskell-mode-autoloads.el")
 
 
 (custom-set-variables

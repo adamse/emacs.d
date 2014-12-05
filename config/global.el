@@ -5,6 +5,7 @@
 (require 'js)
 (require 'org-agenda)
 (require 'ielm)
+(require 'reveal-in-finder)
 
 ;; Fundamental functions
 
