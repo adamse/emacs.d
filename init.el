@@ -110,8 +110,6 @@
 (god-mode)
 (color-theme-solarized-light)
 (goto-last-point-mode)
-(turn-on-haskell-simple-indent)
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -122,4 +120,4 @@
  '(safe-local-variable-values (quote ((haskell-indent-spaces . 2) (haskell-indent-spaces . 2) (haskell-process-type . cabal-repl) (shm-lambda-indent-style . leftmost-parent))))
  '(send-mail-function (quote smtpmail-send-it)))
 
-(set-default-font "-apple-Monaco-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+(set-default-font "-apple-Menlo-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")

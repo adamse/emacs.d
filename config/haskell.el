@@ -48,6 +48,12 @@
   (interactive)
   (haskell-move-nested -1))
 
+(defun haskell-process-set-ghci ()
+  "Switch to GHCi process"
+  (interactive)
+  (setq haskell-process-type 'ghci)
+  (message "Using GHCi"))
+
 (defvar haskell-process-use-ghci nil)
 
 (defun haskell-process-cabal-build-and-restart ()
@@ -152,8 +158,10 @@ the cursor position happened."
 
 ;; Mode settings
 
+(turn-on-haskell-simple-indent)
+
 (custom-set-variables
- '(haskell-process-type 'ghci)
+ '(haskell-process-type 'cabal-repl)
  '(haskell-process-args-ghci '())
  '(haskell-notify-p t)
  '(haskell-stylish-on-save nil)
@@ -243,6 +251,7 @@ the cursor position happened."
 (define-key haskell-mode-map (kbd "C-<right>") 'haskell-move-right)
 (define-key haskell-mode-map (kbd "C-<left>") 'haskell-move-left)
 (define-key haskell-mode-map (kbd "<space>") 'haskell-mode-contextual-space)
+(define-key haskell-mode-map (kbd "C-c C-h C-t") 'haskell-process-set-ghci)
 
 (define-key haskell-cabal-mode-map [f9] 'haskell-interactive-mode-visit-error)
 (define-key haskell-cabal-mode-map [f11] 'haskell-process-cabal-build)
