@@ -67,3 +67,6 @@
 [submodule "packages/reveal-in-finder"]
 	path = packages/reveal-in-finder
 	url = https://github.com/kaz-yos/elisp.git
+[submodule "packages/expand-region"]
+	path = packages/expand-region
+	url = https://github.com/magnars/expand-region.el.git
