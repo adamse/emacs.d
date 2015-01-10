@@ -2,11 +2,36 @@
 
 (require 'cl)
 (require 'package)
+
+; Packages setup
+
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+
 (package-initialize)
 
 ;; Packages and configs to load
 
-(defvar melpa-packages '(auctex))
+(defvar my-packages
+  '(auctex
+    ghc ; ghc-mod mode
+    company
+    company-ghc))
+
+;; Install packages
+
+(defun elpa-packages-installed-p ()
+  (loop for p in my-packages
+        when (not (package-installed-p p)) do (return nil)
+        finally (return t)))
+
+(unless (elpa-packages-installed-p)
+  (package-refresh-contents)
+  (dolist (p my-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+
+;; Packages in .emacs.d
 
 (defvar packages
   '(god-mode
@@ -31,13 +56,14 @@
     hamlet-mode
     number
     hide-region
-    ats-mode
+                                        ;    ats-mode
     multiple-cursors
     projects-mode
     color-theme
     color-theme-solarized
     flycheck
-    reveal-in-finder)
+    reveal-in-finder
+    expand-region)
   "Packages whose location follows the
   packages/package-name/package-name.el format.")
 
@@ -52,6 +78,7 @@
   '("global"
     "god"
     "agda"
+    "coq"
     "haskell"
     "erc"
     "email"
@@ -70,6 +97,10 @@
                               "packages/"
                               location)))
 
+(add-to-list 'load-path "/usr/local/opt/coq/lib/emacs/site-lisp")
+(load-file (concat (file-name-directory load-file-name)
+                   "packages/ProofGeneral/generic/proof-site.el"))
+
 (loop for name in packages
       do (progn (unless (fboundp name)
                   (add-to-list 'load-path
@@ -78,19 +109,6 @@
                                        "packages/"
                                        (symbol-name name)))
                   (require name))))
-
-;; Install melpa packages
-
-(defun melpa-packages-installed-p ()
-  (loop for p in melpa-packages
-        when (not (package-installed-p p)) do (return nil)
-        finally (return t)))
-
-(unless (melpa-packages-installed-p)
-  (package-refresh-contents)
-  (dolist (p melpa-packages)
-    (when (not (package-installed-p p))
-      (package-install p))))
 
 ;; Setup path for OS X
 

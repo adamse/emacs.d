@@ -13,6 +13,8 @@
 (require 'haskell-debug)
 (require 'sgml-mode)
 (require 'css-mode)
+(require 'company)
+(require 'ghc)
 
 ;; Functions
 
@@ -215,11 +217,26 @@ the cursor position happened."
 
 ;; Add hook
 
+; Indentation pick one of the two!
 (add-hook 'haskell-mode-hook 'structured-haskell-mode)
+;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'haskell-interactive-mode-hook 'structured-haskell-repl-mode)
+
 (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
+
 (add-hook 'w3m-display-hook 'w3m-haddock-display)
+
+; ghc-mod
+(autoload 'ghc-init "ghc" nil t)
+(autoload 'ghc-debug "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+
+; company completion
+(add-to-list 'company-backends 'company-ghc)
+(custom-set-variables '(compoany-ghc-show-info t))
+(add-hook 'haskell-mode-hook 'company-mode)
 
 ;; Keybindings
 

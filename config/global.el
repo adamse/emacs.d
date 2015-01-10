@@ -6,6 +6,7 @@
 (require 'org-agenda)
 (require 'ielm)
 (require 'reveal-in-finder)
+(require 'expand-region)
 
 ;; Fundamental functions
 
@@ -378,6 +379,8 @@ prefix argument."
 
 (global-set-key (kbd "C-x C-a") 'org-agenda-list)
 
+(global-set-key (kbd "C-@") 'er/expand-region)
+
 ;; Convenience bindings for god-mode
 
 (global-set-key (kbd "C->") 'end-of-buffer)
@@ -505,9 +508,6 @@ prefix argument."
 (set-language-environment "UTF-8")
 
 ;; Faces
-
-(custom-set-faces
- '(default ((t (:inherit nil :height 140 :width normal :family "Ubuntu Mono")))))
 
 (defface esk-paren-face
   '((((class color) (background dark))
