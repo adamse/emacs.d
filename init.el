@@ -16,7 +16,11 @@
   '(auctex
     ghc ; ghc-mod mode
     company
-    company-ghc))
+    company-ghc
+    git-commit-mode
+    git-rebase-mode
+    gitconfig-mode
+    gitignore-mode))
 
 ;; Install packages
 
