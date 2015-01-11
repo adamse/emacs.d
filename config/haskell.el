@@ -188,7 +188,7 @@ the cursor position happened."
  '(haskell-process-show-debug-tips nil)
  '(haskell-process-suggest-hoogle-imports nil)
  '(haskell-process-suggest-haskell-docs-imports t)
- '(hindent-style "chris-done"))
+ '(hindent-style "adamse"))
 
 (setq haskell-complete-module-preferred
       '("Data.ByteString"
@@ -235,7 +235,7 @@ the cursor position happened."
 
 ; company completion
 (add-to-list 'company-backends 'company-ghc)
-(custom-set-variables '(compoany-ghc-show-info t))
+(custom-set-variables '(company-ghc-show-info t))
 (add-hook 'haskell-mode-hook 'company-mode)
 
 ;; Keybindings

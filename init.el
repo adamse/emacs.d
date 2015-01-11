@@ -132,14 +132,3 @@
 (god-mode)
 (color-theme-solarized-light)
 (goto-last-point-mode)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ns-right-alternate-modifier (quote alt))
- '(safe-local-variable-values (quote ((haskell-indent-spaces . 2) (haskell-indent-spaces . 2) (haskell-process-type . cabal-repl) (shm-lambda-indent-style . leftmost-parent))))
- '(send-mail-function (quote smtpmail-send-it)))
-
-(set-default-font "-apple-Menlo-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")

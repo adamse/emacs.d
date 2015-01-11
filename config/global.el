@@ -414,6 +414,7 @@ prefix argument."
 (put 'upcase-region 'disabled nil)
 
 ;; Enable cool modes
+
 (ido-mode 1)
 (global-font-lock-mode 1)
 
@@ -437,6 +438,8 @@ prefix argument."
 (setq default-major-mode 'text-mode)
 (setq-default indent-tabs-mode nil)
 (setq-default cursor-type 'bar)
+
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
 
 (setq gnus-button-url 'browse-url-generic)
 
@@ -503,11 +506,15 @@ prefix argument."
 (add-to-list 'auto-mode-alist (cons "\\.md\\'" 'markdown-mode))
 (add-to-list 'auto-mode-alist (cons "\\.markdown\\'" 'markdown-mode))
 
+(add-to-list 'auto-mode-alist (cons "\\.v$" 'coq-mode))
+
 ;; Environment settings
 
 (set-language-environment "UTF-8")
 
 ;; Faces
+
+(set-default-font "-apple-Menlo-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 
 (defface esk-paren-face
   '((((class color) (background dark))
