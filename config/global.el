@@ -515,6 +515,7 @@ prefix argument."
 ;; Faces
 
 (set-default-font "-apple-Menlo-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+(set-fontset-font "fontset-default" 'unicode "Symbola")
 
 (defface esk-paren-face
   '((((class color) (background dark))
