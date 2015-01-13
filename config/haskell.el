@@ -249,7 +249,7 @@ the cursor position happened."
 (define-key interactive-haskell-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
 (define-key interactive-haskell-mode-map (kbd "C-c c") 'haskell-process-cabal)
 (define-key interactive-haskell-mode-map (kbd "M-.") 'haskell-mode-goto-loc)
-(define-key interactive-haskell-mode-map (kbd "C-c C-t") 'haskell-mode-show-type-at)
+(define-key interactive-haskell-mode-map (kbd "C-c C-t") 'ghc-show-type)
 
 (define-key hamlet-mode-map [f12] 'haskell-process-cabal-build-and-restart)
 (define-key hamlet-mode-map (kbd "C-`") 'haskell-interactive-bring)
