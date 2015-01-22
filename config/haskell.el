@@ -188,7 +188,7 @@ the cursor position happened."
  '(haskell-process-show-debug-tips nil)
  '(haskell-process-suggest-hoogle-imports nil)
  '(haskell-process-suggest-haskell-docs-imports t)
- '(hindent-style "adamse"))
+ '(hindent-style "chris-done"))
 
 (setq haskell-complete-module-preferred
       '("Data.ByteString"
