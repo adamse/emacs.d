@@ -117,6 +117,9 @@
 
 ;; Setup path for OS X
 
+(exec-path-from-shell-copy-env "LIBRARY_PATH")
+(exec-path-from-shell-copy-env "DYLD_LIBRARY_PATH")
+
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
