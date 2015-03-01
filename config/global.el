@@ -381,6 +381,11 @@ prefix argument."
 (global-set-key (kbd "<up>") 'windmove-up)
 (global-set-key (kbd "<down>") 'windmove-down)
 
+(global-set-key (kbd "<s-left>") 'windmove-left)
+(global-set-key (kbd "<s-right>") 'windmove-right)
+(global-set-key (kbd "<s-up>") 'windmove-up)
+(global-set-key (kbd "<s-down>") 'windmove-down)
+
 ;; Convenience bindings for god-mode
 
 (global-set-key (kbd "C->") 'end-of-buffer)
@@ -431,7 +436,6 @@ prefix argument."
 (transient-mark-mode 1)
 (delete-selection-mode 1)
 (set-auto-saves)
-(global-linum-mode t)
 
 ;; Default mode settings
 
