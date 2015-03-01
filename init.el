@@ -68,6 +68,7 @@
     color-theme-solarized
     flycheck
     reveal-in-finder
+    idris-mode
     expand-region)
   "Packages whose location follows the
   packages/package-name/package-name.el format.")
@@ -89,6 +90,7 @@
     "email"
     "lisp"
     "markdown"
+    "tex"
     "org")
   "Configuration files that follow the config/foo.el file path
   format.")
@@ -118,7 +120,7 @@
 ;; Setup path for OS X
 
 (exec-path-from-shell-copy-env "LIBRARY_PATH")
-(exec-path-from-shell-copy-env "DYLD_LIBRARY_PATH")
+(exec-path-from-shell-copy-env "DYLD_FALLBACK_LIBRARY_PATH")
 
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
