@@ -25,3 +25,8 @@
               (insert (read-from-minibuffer "Task title: "))
               (unless no-clock (org-clock-in)))
             (end-of-line)))))))
+
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key (kbd "RET") 'newline-and-indent)))
