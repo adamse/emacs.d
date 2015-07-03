@@ -7,6 +7,8 @@
 (require 'ielm)
 (require 'reveal-in-finder)
 (require 'expand-region)
+(require 'flyspell)
+(require 'paredit)
 
 ;; Fundamental functions
 
@@ -372,7 +374,7 @@ prefix argument."
 (global-set-key [f3] 'resmacro-start-macro)
 (global-set-key (kbd "C-x (") 'resmacro-start-macro)
 
-;(global-set-key (kbd "C-x C-a") 'org-agenda-list)
+                                        ;(global-set-key (kbd "C-x C-a") 'org-agenda-list)
 
 (global-set-key (kbd "C-@") 'er/expand-region)
 
@@ -403,6 +405,11 @@ prefix argument."
 (define-key ag-mode-map (kbd "p") 'previous-error-no-select)
 (define-key ag-mode-map (kbd "n") 'next-error-no-select)
 
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
+
 ;; Disable default settings
 
 (scroll-bar-mode -1)
@@ -425,7 +432,7 @@ prefix argument."
 
 (require 'dired-x)
 (setq-default dired-omit-files-p t)
-(setq dired-omit-files "\\.dyn_hi$\\|\\.dyn_o$\\|\\.hi$\\|\\.o$")
+(setq dired-omit-files "\\.dyn_hi$\\|\\.dyn_o$\\|\\.hi$\\|\\.o$|\\.ibc$")
 
 ;; Enable cool defaults
 
@@ -447,7 +454,14 @@ prefix argument."
 
 (setq gnus-button-url 'browse-url-generic)
 
-(setq ido-ignore-files '("\\.dyn_hi$""\\.dyn_o$""\\.hi$" "\\.o$" "\\.tags$" "^\\.ghci$"))
+(setq ido-ignore-files
+      '("\\.dyn_hi$"
+        "\\.dyn_o$"
+        "\\.hi$"
+        "\\.o$"
+        "\\.tags$"
+        "^\\.ghci$"
+        "\\.agdai$"))
 (setq ido-max-directory-size 200000)
 
 (setq browse-url-browser-function gnus-button-url)
@@ -497,6 +511,7 @@ prefix argument."
 (add-hook 'ielm-mode-hook 'elisp-slime-nav-mode)
 (add-hook 'minibuffer-setup-hook 'conditionally-enable-paredit-mode)
 
+
 ;; Auto-loads
 
 (add-to-list 'auto-mode-alist (cons "\\.hs\\'" 'haskell-mode))
@@ -518,8 +533,9 @@ prefix argument."
 
 ;; Faces
 
-(set-default-font "-apple-Menlo-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-(set-fontset-font "fontset-default" 'unicode "Symbola")
+(set-default-font "-apple-PragmataPro-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+(set-fontset-font "fontset-default" 'unicode "PragmataPro")
+;(set-fontset-font "fontset-default" 'unicode "Symbola")
 
 (defface esk-paren-face
   '((((class color) (background dark))
@@ -556,5 +572,12 @@ prefix argument."
            (haskell-indent-spaces . 2)
            (haskell-process-type . cabal-repl)
            (shm-lambda-indent-style . leftmost-parent)))))
+
+(defun my-paredit-nonlisp ()
+  "Turn on paredit mode for non-lisps."
+  (interactive)
+  (set (make-local-variable 'paredit-space-for-delimiter-predicates)
+       '((lambda (endp delimiter) nil)))
+  (paredit-mode 1))
 
 (provide 'global)

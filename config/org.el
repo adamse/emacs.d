@@ -30,3 +30,8 @@
 (add-hook 'org-mode-hook
           (lambda ()
             (local-set-key (kbd "RET") 'newline-and-indent)))
+
+; use xelatex :D
+(setq org-latex-to-pdf-process
+      '("xelatex -interaction nonstopmode %f"
+        "xelatex -interaction nonstopmode %f")) ;; for multiple passes

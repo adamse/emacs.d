@@ -14,14 +14,17 @@
 
 (defvar my-packages
   '(auctex
-    ghc ; ghc-mod mode
+    ghc ; for ghc-mod
     company
     company-ghc
+    company-coq
     git-commit-mode
     git-rebase-mode
+    magit
     gitconfig-mode
     gitignore-mode
-    matlab-mode))
+    matlab-mode
+    org))
 
 ;; Install packages
 
@@ -44,9 +47,10 @@
     exec-path-from-shell
     haskell-mode
     smex
-    magit
+    ;magit
     goto-last-change
     ace-jump-mode
+;    w3m
     markdown-mode
     pandoc-mode
     dash
@@ -81,15 +85,18 @@
   package-name/module-name.el format.")
 
 (defvar configs
-  '("global"
+  '("osx"
+    "global"
     "god"
     "agda"
     "coq"
     "haskell"
     "erc"
+;    "w3m"
     "email"
     "lisp"
     "markdown"
+    "python"
     "tex"
     "org")
   "Configuration files that follow the config/foo.el file path
@@ -117,13 +124,8 @@
                                        (symbol-name name)))
                   (require name))))
 
-;; Setup path for OS X
+;; Setup  for OS X
 
-(exec-path-from-shell-copy-env "LIBRARY_PATH")
-(exec-path-from-shell-copy-env "DYLD_FALLBACK_LIBRARY_PATH")
-
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
 
 ;; Emacs configurations
 
@@ -161,8 +163,146 @@
  '(haskell-process-use-presentation-mode t)
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save nil)
+ '(hindent-process-path "/Users/adam/.emacs.d/packages/hindent/.cabal-sandbox/bin/hindent")
  '(hindent-style "chris-done")
- '(safe-local-variable-values (quote ((Tex-master . "ass") (haskell-indent-spaces . 4) (haskell-indent-spaces . 2) (haskell-process-type . cabal-repl) (shm-lambda-indent-style . leftmost-parent))))
+ '(org-html-head "<style type=\"text/css\">.figure {text-align:center;
+         width: 50%;
+         margin-left:auto;
+         margin-right:auto;
+         background-color: #ececec;
+         padding: 0.3em;
+        }
+.caption {font-size:90%;
+      }
+
+body {
+    margin: auto;
+    padding-right: 1em;
+    padding-left: 1em;
+    max-width: 44em;
+    /* border-left: 1px solid black;
+    border-right: 1px solid black; */
+    color: black;
+    font-family: sans-serif;
+    /* font-size: 100%;
+    line-height: 140%; */
+    /* background-color: #ececec; */
+}
+pre {
+/*     border: 1px dotted gray; */
+    background-color: #ececec;
+    color: #1111111;
+    padding: 0.5em;
+}
+code {
+    font-family: monospace;
+    padding: 0.1em;
+
+/*    font-style: italic; */
+/*    font-weight: bold;  */
+}
+h1 a, h2 a, h3 a, h4 a, h5 a {
+    text-decoration: none;
+    /* color: #7a5ada; */
+}
+h1, h2, h3, h4, h5 {
+    /* font-family: verdana; */
+    font-weight: bold;
+/*    border-bottom: 1px dotted black; */
+    /* color: #7a5ada; */
+}
+h1 {
+        font-size: 130%;
+}
+
+h2 {
+        font-size: 110%;
+}
+
+h3 {
+        font-size: 95%;
+}
+
+h4 {
+        font-size: 90%;
+        font-style: italic;
+}
+
+h5 {
+        font-size: 90%;
+        font-style: italic;
+}
+
+h1.title {
+        font-size: 200%;
+        font-weight: bold;
+        padding-top: 0.2em;
+        padding-bottom: 0.2em;
+        text-align: left;
+        border: none;
+}
+
+dt code {
+        font-weight: bold;
+}
+dd p {
+        margin-top: 0;
+}
+
+#footer {
+        padding-top: 1em;
+        font-size: 70%;
+        color: gray;
+        text-align: center;
+}
+
+#toc {
+/*  list-style-type: none;
+    float: left;
+    max-width: 10em;
+    font-size: 80%;
+    margin: 0;
+
+/*
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  border: thin dotted
+
+  /*
+
+  padding: 0;
+  margin: 0; */
+/*
+
+  width: 9em  */
+}
+
+#toc li {
+  /* background: white; */
+  /* margin: 0.5em 0; */
+  /* padding: 0.3em; */
+  /* border-right: 1em solid black */
+}
+#toc a {
+  text-decoration: none }
+
+/* a:link { color: blue } */
+/* a:visited { color: purple } */
+
+address {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: thin dotted
+}
+
+img {
+margin-left: auto;
+margin-right: auto;
+max-width: 100%;
+}</style>")
+ '(org-startup-truncated nil)
+ '(safe-local-variable-values (quote ((coq-prog-args "-emacs-U" "-I" "/Users/adam/Code/cpdt/cpdt/src") (haskell-indent-spaces . 4) (haskell-indent-spaces . 2) (haskell-process-type . cabal-repl) (shm-lambda-indent-style . leftmost-parent))))
  '(send-mail-function (quote smtpmail-send-it))
  '(shm-auto-insert-bangs t)
  '(shm-auto-insert-skeletons t)

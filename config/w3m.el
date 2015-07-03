@@ -18,3 +18,5 @@
   (if (or (equal '(w3m-anchor) (get-text-property (point) 'face))
           (equal '(w3m-arrived-anchor) (get-text-property (point) 'face)))
       (w3m-view-this-url)))
+
+(set 'w3m-command "/usr/local/bin/w3m")
