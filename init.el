@@ -14,16 +14,13 @@
 
 (defvar my-packages
   '(auctex
-    ghc ; for ghc-mod
     company
-    company-ghc
     company-coq
-    git-commit-mode
-    git-rebase-mode
     magit
     gitconfig-mode
     gitignore-mode
     matlab-mode
+    solarized-theme
     org))
 
 ;; Install packages
@@ -46,34 +43,31 @@
     paredit
     exec-path-from-shell
     haskell-mode
-    smex
-    ;magit
     goto-last-change
     ace-jump-mode
-;    w3m
     markdown-mode
     pandoc-mode
-    dash
     elisp-slime-nav
     lpaste
     echo-keys
     align-by-current-symbol
+    s
+    hide-region
+    projects-mode
+    smex
     ag
     goto-last-point
     github-urls
-    s
     hamlet-mode
     number
-    hide-region
-                                        ;    ats-mode
     multiple-cursors
-    projects-mode
-    color-theme
-    color-theme-solarized
     flycheck
     reveal-in-finder
     idris-mode
-    expand-region)
+    expand-region
+    jonprl-mode
+    ;; who knows?
+    )
   "Packages whose location follows the
   packages/package-name/package-name.el format.")
 
@@ -88,12 +82,10 @@
   '("osx"
     "global"
     "god"
+    "w3m"
     "agda"
     "coq"
     "haskell"
-    "erc"
-;    "w3m"
-    "email"
     "lisp"
     "markdown"
     "python"
@@ -124,9 +116,6 @@
                                        (symbol-name name)))
                   (require name))))
 
-;; Setup  for OS X
-
-
 ;; Emacs configurations
 
 (loop for name in configs
@@ -136,17 +125,24 @@
 
 ;; Mode initializations
 
-(smex-initialize)
 (god-mode)
-(color-theme-solarized-light)
 (goto-last-point-mode)
+
+;; Custom space
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(agda2-include-dirs (quote ("/Users/adam/local/agda-stdlib/src" ".")))
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
  '(company-ghc-show-info t)
+ '(custom-enabled-themes (quote (solarized-light)))
+ '(custom-safe-themes
+   (quote
+    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" default)))
  '(haskell-interactive-mode-eval-pretty nil)
  '(haskell-interactive-mode-include-file-name nil)
  '(haskell-notify-p t)
@@ -159,13 +155,15 @@
  '(haskell-process-suggest-haskell-docs-imports t)
  '(haskell-process-suggest-hoogle-imports nil)
  '(haskell-process-suggest-remove-import-lines t)
- '(haskell-process-type (quote cabal-repl))
  '(haskell-process-use-presentation-mode t)
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save nil)
- '(hindent-process-path "/Users/adam/.emacs.d/packages/hindent/.cabal-sandbox/bin/hindent")
+ '(hindent-process-path
+   "/Users/adam/Code/emacs.d/packages/hindent/.stack-work/install/x86_64-osx/lts-2.9/7.8.4/bin/hindent")
  '(hindent-style "chris-done")
- '(org-html-head "<style type=\"text/css\">.figure {text-align:center;
+ '(jonprl-path "/Users/adam/local/JonPRL/bin/jonprl")
+ '(org-html-head
+   "<style type=\"text/css\">.figure {text-align:center;
          width: 50%;
          margin-left:auto;
          margin-right:auto;
@@ -302,7 +300,16 @@ margin-right: auto;
 max-width: 100%;
 }</style>")
  '(org-startup-truncated nil)
- '(safe-local-variable-values (quote ((coq-prog-args "-emacs-U" "-I" "/Users/adam/Code/cpdt/cpdt/src") (haskell-indent-spaces . 4) (haskell-indent-spaces . 2) (haskell-process-type . cabal-repl) (shm-lambda-indent-style . leftmost-parent))))
+ '(safe-local-variable-values
+   (quote
+    ((buffer-file-coding-system . utf-8-unix)
+     (sgml-parent-document "users_guide.xml" "book" "chapter" "sect1")
+     (sgml-parent-document "users_guide.xml" "book" "chapter")
+     (coq-prog-args "-emacs-U" "-I" "/Users/adam/Code/cpdt/cpdt/src")
+     (haskell-indent-spaces . 4)
+     (haskell-indent-spaces . 2)
+     (haskell-process-type . cabal-repl)
+     (shm-lambda-indent-style . leftmost-parent))))
  '(send-mail-function (quote smtpmail-send-it))
  '(shm-auto-insert-bangs t)
  '(shm-auto-insert-skeletons t)
@@ -313,4 +320,6 @@ max-width: 100%;
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(erc-my-nick-face ((t (:foreground "#dca3a3" :weight bold)))))
+ '(erc-my-nick-face ((t (:foreground "#dca3a3" :weight bold))))
+ '(shm-current-face ((t (:background "#eee8d5"))))
+ '(shm-quarantine-face ((t (:background "Lemonchiffon1")))))

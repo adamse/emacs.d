@@ -73,3 +73,6 @@
 [submodule "packages/company-coq"]
 	path = packages/company-coq
 	url = https://github.com/cpitclaudel/company-coq.git
+[submodule "packages/jonprl-mode"]
+	path = packages/jonprl-mode
+	url = https://github.com/david-christiansen/jonprl-mode.git

@@ -1,4 +1,4 @@
-;; Functions
+(require 'god-mode)
 
 (defun god-update-cursor ()
   "Update my cursor."
@@ -18,7 +18,7 @@
 (global-set-key (kbd "C-x C-2") 'split-window-below)
 (global-set-key (kbd "C-x C-3") 'split-window-right)
 (global-set-key (kbd "C-x C-0") 'delete-window)
-(global-set-key (kbd "<escape>") 'god-mode-all)
+(global-set-key (kbd "<escape>") 'god-local-mode)
 
 (define-key god-local-mode-map (kbd ".") 'repeat)
 (define-key god-local-mode-map (kbd "[") 'paredit-open-square)
@@ -31,7 +31,5 @@
 (add-hook 'overwrite-mode-hook 'god-toggle-on-overwrite)
 
 (add-to-list 'god-exempt-major-modes 'message-mode)
-
-(god-mode)
 
 (provide 'god)

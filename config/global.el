@@ -9,6 +9,7 @@
 (require 'expand-region)
 (require 'flyspell)
 (require 'paredit)
+(require 'magit)
 
 ;; Fundamental functions
 
@@ -344,7 +345,7 @@ prefix argument."
 (global-set-key (kbd "s-u") 'winner-mode-undo)
 
 (global-set-key (kbd "C-\\") 'goto-last-point)
-(global-set-key (kbd "C-v") 'magit-switch-buffer)
+(global-set-key (kbd "C-v") 'magit-status)
 (global-set-key (kbd "M-z") 'zap-up-to-char-repeatable)
 (global-set-key (kbd "M-Q") 'unfill-paragraph)
 (global-set-key (kbd "M-;") 'comment-dwim-line)
@@ -374,7 +375,7 @@ prefix argument."
 (global-set-key [f3] 'resmacro-start-macro)
 (global-set-key (kbd "C-x (") 'resmacro-start-macro)
 
-                                        ;(global-set-key (kbd "C-x C-a") 'org-agenda-list)
+;;(global-set-key (kbd "C-x C-a") 'org-agenda-list)
 
 (global-set-key (kbd "C-@") 'er/expand-region)
 
