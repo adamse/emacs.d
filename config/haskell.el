@@ -209,12 +209,12 @@ the cursor position happened."
 (setq haskell-interactive-mode-eval-mode 'haskell-mode)
 
 (setq haskell-process-path-ghci
-      "ghci-ng")
+      "ghci")
 
 (setq haskell-process-args-ghci '("-ferror-spans"))
 
 (setq haskell-process-args-cabal-repl
-      '("--ghc-option=-ferror-spans" "--with-ghc=ghci-ng"))
+      '("--ghc-option=-ferror-spans"))
 
 (setq haskell-process-generate-tags nil)
 
@@ -473,6 +473,7 @@ import Data.Vector (Vector)
   (define-key interactive-haskell-mode-map (kbd "C-c C-c") 'haskell-process-stack-build)
   (define-key interactive-haskell-mode-map (kbd "C-c c") 'haskell-process-stack))
 
+
 ;; GHC specific
 
 (setq ghc-location "~/Code/ghc")
@@ -499,8 +500,8 @@ import Data.Vector (Vector)
   (interactive)
   (let ((revision (if (boundp 'ghc-revision)
                       (ghc-revision)
-                    ("master"))))
-    (compile (concat "cd " ghc-location "; " "arc lint --output compiler --rev " revision)))
+                    "master")))
+    (compile (concat "cd " ghc-location "; arc lint --output compiler --rev " revision)))
   (set-buffer "*compilation*")
   (setq default-directory ghc-location))
 
