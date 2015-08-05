@@ -155,6 +155,7 @@
  '(haskell-process-suggest-haskell-docs-imports t)
  '(haskell-process-suggest-hoogle-imports nil)
  '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-type (quote cabal-repl))
  '(haskell-process-use-presentation-mode t)
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save nil)
@@ -302,7 +303,10 @@ max-width: 100%;
  '(org-startup-truncated nil)
  '(safe-local-variable-values
    (quote
-    ((buffer-file-coding-system . utf-8-unix)
+    ((haskell-process-args-ghci "ghci")
+     (haskell-process-path-ghci . "stack")
+     (haskell-process-type . ghci)
+     (buffer-file-coding-system . utf-8-unix)
      (sgml-parent-document "users_guide.xml" "book" "chapter" "sect1")
      (sgml-parent-document "users_guide.xml" "book" "chapter")
      (coq-prog-args "-emacs-U" "-I" "/Users/adam/Code/cpdt/cpdt/src")
