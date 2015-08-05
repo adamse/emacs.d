@@ -487,9 +487,10 @@ import Data.Vector (Vector)
                      (if (boundp 'compilation-save-buffers-predicate) ;; since Emacs 24.1(?)
                          compilation-save-buffers-predicate))
   (let ((compile-command
-         (if (boundp 'ghc-compile)
-             (concat "cd " ghc-location "; " ghc-compile)
-           (concat "cd " ghc-location "/ghc; EXTRA_HC_OPTS=-ferror-spans make 2"))))
+         (concat "EXTRA_HC_OPTS=-ferror-spans "
+                 (if (boundp 'ghc-compile)
+                     (concat "cd " ghc-location "; " ghc-compile)
+                   (concat "cd " ghc-location "/ghc; make 2")))))
     (compilation-start compile-command 'haskell-compilation-mode))
   (set-buffer "*haskell-compilation*")
   (setq default-directory ghc-location))
