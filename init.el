@@ -138,6 +138,9 @@
  '(agda2-include-dirs (quote ("/Users/adam/local/agda-stdlib/src" ".")))
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
+ '(browse-url-browser-function (quote browse-url-default-macosx-browser))
+ '(browse-url-generic-args nil)
+ '(calendar-week-start-day 1)
  '(company-ghc-show-info t)
  '(custom-enabled-themes (quote (solarized-light)))
  '(custom-safe-themes
@@ -303,7 +306,8 @@ max-width: 100%;
  '(org-startup-truncated nil)
  '(safe-local-variable-values
    (quote
-    ((haskell-process-args-ghci "ghci")
+    ((haskell-process-type . stack-ghci)
+     (haskell-process-args-ghci "ghci")
      (haskell-process-path-ghci . "stack")
      (haskell-process-type . ghci)
      (buffer-file-coding-system . utf-8-unix)
@@ -317,7 +321,7 @@ max-width: 100%;
  '(send-mail-function (quote smtpmail-send-it))
  '(shm-auto-insert-bangs t)
  '(shm-auto-insert-skeletons t)
- '(shm-use-hdevtools t)
+ '(shm-use-hdevtools nil)
  '(shm-use-presentation-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
