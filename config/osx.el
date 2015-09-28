@@ -10,6 +10,4 @@
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
-(setq ns-right-alternate-modifier nil)
-
 (provide 'osx)
