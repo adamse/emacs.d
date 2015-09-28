@@ -247,9 +247,12 @@ import Data.Vector (Vector)
 
 ;; Add hook
 
-(add-hook 'haskell-mode-hook 'structured-haskell-mode)
+;; (add-hook 'haskell-mode-hook 'structured-haskell-mode)
+;; (remove-hook 'haskell-mode-hook 'structured-haskell-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-(add-hook 'haskell-interactive-mode-hook 'structured-haskell-repl-mode)
+;;(add-hook 'haskell-interactive-mode-hook 'structured-haskell-repl-mode)
 (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
 (add-hook 'w3m-display-hook 'w3m-haddock-display)
 
@@ -274,7 +277,7 @@ import Data.Vector (Vector)
 (define-key interactive-haskell-mode-map (kbd "C-c c") 'haskell-process-cabal)
 (define-key interactive-haskell-mode-map (kbd "M-.") 'haskell-mode-jump-to-def-or-tag)
 (define-key interactive-haskell-mode-map (kbd "C-?") 'haskell-mode-find-uses)
-(define-key interactive-haskell-mode-map (kbd "C-c C-t") 'haskell-mode-show-type-at)
+(define-key interactive-haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
 
 (define-key hamlet-mode-map [f12] 'haskell-process-cabal-build-and-restart)
 (define-key hamlet-mode-map (kbd "C-`") 'haskell-interactive-bring)
@@ -289,7 +292,7 @@ import Data.Vector (Vector)
 
 (define-key haskell-mode-map (kbd "C-c i") 'hindent/reformat-decl)
 (define-key haskell-mode-map (kbd "C-c C-d") 'haskell-w3m-open-haddock)
-(define-key haskell-mode-map (kbd "-") 'smart-hyphen)
+;;(define-key haskell-mode-map (kbd "-") 'smart-hyphen)
 (define-key haskell-mode-map [f8] 'haskell-navigate-imports)
 (define-key haskell-mode-map (kbd "C-c C-u") 'haskell-insert-undefined)
 (define-key haskell-mode-map (kbd "C-c C-a") 'haskell-insert-doc)
@@ -321,7 +324,7 @@ import Data.Vector (Vector)
 (define-key shm-map (kbd "C-c C-p") 'shm/expand-pattern)
 (define-key shm-map (kbd ",") 'shm-comma-god)
 (define-key shm-map (kbd "C-c C-s") 'shm/case-split)
-(define-key shm-map (kbd "SPC") 'shm-contextual-space)
+;;(define-key shm-map (kbd "SPC") 'shm-contextual-space)
 (define-key shm-map (kbd "C-\\") 'shm/goto-last-point)
 (define-key shm-map (kbd "C-c C-f") 'shm-fold-toggle-decl)
 
