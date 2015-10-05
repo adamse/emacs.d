@@ -6,10 +6,7 @@
              agda-mode-location))
 
 (require 'agda2-mode)
-
-; Load agda input mode so that I can enter unicode everywhere!
-(load-file (let ((coding-system-for-read 'utf-8))
-             (concat (file-name-directory agda-mode-location) "agda-input.el")))
+(require 'agda-input)
 
 (define-key agda2-mode-map (kbd "M-n") 'agda2-next-goal)
 (define-key agda2-mode-map (kbd "M-p") 'agda2-previous-goal)
