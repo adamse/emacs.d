@@ -5,6 +5,7 @@
 (require 'hindent)
 (require 'haskell-process)
 (require 'haskell-simple-indent)
+(require 'eri)
 (require 'haskell-interactive-mode)
 (require 'haskell)
 (require 'haskell-font-lock)
@@ -13,6 +14,7 @@
 (require 'css-mode)
 (require 'ghci-script-mode)
 (require 'shm)
+(require 'ghc)
 
 
 ;; Functions
@@ -139,14 +141,12 @@ the cursor position happened."
   (interactive)
   (if god-local-mode
       (call-interactively 'god-mode-self-insert)
-    (if (looking-back "import")
-        (call-interactively 'haskell-mode-contextual-space)
-      (progn
-        (let ((ident (haskell-ident-at-point)))
-          (when ident
-            (and interactive-haskell-mode
-                 (haskell-process-do-try-type ident))))
-        (call-interactively 'shm/space)))))
+    (progn
+      (let ((ident (haskell-ident-at-point)))
+        (when ident
+          (and interactive-haskell-mode
+               (haskell-process-do-try-type ident))))
+      (call-interactively 'shm/space))))
 
 (defun shm/insert-putstrln ()
   "Insert a putStrLn."
@@ -249,12 +249,22 @@ import Data.Vector (Vector)
 
 ;; (add-hook 'haskell-mode-hook 'structured-haskell-mode)
 ;; (remove-hook 'haskell-mode-hook 'structured-haskell-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'haskell-simple-indent-mode)
+;; (add-hook 'haskell-mode-hook 'eri-indent)
+;; (define-key haskell-mode-map (kbd "TAB") 'eri-indent)
+;; (define-key haskell-mode-map (kbd "S-TAB") 'eri-indent-reverse)
+;; (define-key haskell-mode-map (kbd "backtab") 'eri-indent-reverse)
+
 
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 ;;(add-hook 'haskell-interactive-mode-hook 'structured-haskell-repl-mode)
 (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
 (add-hook 'w3m-display-hook 'w3m-haddock-display)
+
+;; (autoload 'ghc-init "ghc" nil t)
+;; (autoload 'ghc-debug "ghc" nil t)
+;; (add-hook 'interactive-haskell-mode-hook (lambda () (ghc-init)))
 
 
 ;; Keybindings
@@ -479,7 +489,7 @@ import Data.Vector (Vector)
 
 ;; GHC specific
 
-(setq ghc-location "~/Code/ghc")
+(setq ghc-location "~/Code/ghc/")
 
 (defun rgrep-ghc (regexp)
   (interactive (list (progn (grep-compute-defaults) (grep-read-regexp))))
