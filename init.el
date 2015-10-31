@@ -157,7 +157,7 @@
  '(haskell-process-show-debug-tips nil)
  '(haskell-process-suggest-haskell-docs-imports t)
  '(haskell-process-suggest-hoogle-imports nil)
- '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-suggest-remove-import-lines nil)
  '(haskell-process-type (quote cabal-repl))
  '(haskell-process-use-presentation-mode t)
  '(haskell-stylish-on-save nil)
@@ -165,7 +165,9 @@
  '(hindent-process-path
    "/Users/adam/Code/emacs.d/packages/hindent/.stack-work/install/x86_64-osx/lts-2.9/7.8.4/bin/hindent")
  '(hindent-style "chris-done")
+ '(ispell-dictionary "en_GB-ise")
  '(jonprl-path "/Users/adam/local/JonPRL/bin/jonprl")
+ '(org-agenda-files (quote ("~/Org/todo.org")))
  '(org-html-head
    "<style type=\"text/css\">.figure {text-align:center;
          width: 50%;
@@ -304,6 +306,7 @@ margin-right: auto;
 max-width: 100%;
 }</style>")
  '(org-startup-truncated nil)
+ '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(safe-local-variable-values
    (quote
     ((haskell-process-type . stack-ghci)
