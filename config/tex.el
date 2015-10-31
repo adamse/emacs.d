@@ -27,8 +27,8 @@
 
 ;(add-hook 'LaTeX-mode-hook 'my-paredit-nonlisp)
 
-(add-hook 'LaTeX-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c C-C") 'tex/build-view)))
+;; (add-hook 'LaTeX-mode-hook
+;;           (lambda ()
+;;             (local-set-key (kbd "C-c C-C") 'tex/build-view)))
 
 (provide 'tex)
