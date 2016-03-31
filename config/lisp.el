@@ -1,6 +1,17 @@
 
 ;; Fundamental functions
 
+(defun conditionally-enable-paredit-mode ()
+  "enable paredit-mode during eval-expression"
+  (if (eq this-command 'eval-expression)
+      (paredit-mode 1)))
+
+(defun paredit-delete-indentation ()
+  "Delete indentation and re-indent."
+  (interactive)
+  (delete-indentation)
+  (paredit-reindent-defun))
+
 (defun paredit-backward-delete. ()
   "A less enraging `paredit-backward-delete'."
   (interactive)
@@ -50,7 +61,7 @@ if the symbol is -foo, then expand to module-name-foo."
             (file-name-nondirectory (buffer-file-name)))))
       (insert (format ";;; %s.el --- $DESC$
 
-;; Copyright (c) 2014 Adam Sandberg Eriksson. All rights reserved.
+;; Copyright (c) 2016 Adam Sandberg Eriksson. All rights reserved.
 
 ;;; Code:
 
@@ -145,6 +156,8 @@ if the symbol is -foo, then expand to module-name-foo."
 
 ;; Keybindings
 
+(global-set-key [remap paredit-kill] (bol-with-prefix paredit-kill))
+
 (define-key emacs-lisp-mode-map (kbd "M-/") 'emacs-lisp-expand-clever)
 (define-key paredit-mode-map (kbd "\\") 'emacs-lisp-return-or-backslash)
 (define-key paredit-mode-map (kbd "<delete>") 'paredit-delete-sexp)
@@ -157,4 +170,6 @@ if the symbol is -foo, then expand to module-name-foo."
 
 ;; Hooks
 
+(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook 'emacs-lisp-module-template)
+(add-hook 'minibuffer-setup-hook 'conditionally-enable-paredit-mode)

@@ -1,3 +1,6 @@
+(use-package markdown-mode
+  :ensure t)
+
 (require 'markdown-mode)
 
 (add-hook 'markdown-mode-hook 'pandoc-mode)

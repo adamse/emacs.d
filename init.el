@@ -3,78 +3,67 @@
 (require 'cl)
 (require 'package)
 
-; Packages setup
+;; Packages setup
 
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
 
 (package-initialize)
 
+;; Theme
+(use-package solarized-theme
+  :ensure t)
+
 ;; Packages and configs to load
 
-(defvar my-packages
-  '(auctex
-    company
-    company-coq
-    magit
-    gitconfig-mode
-    gitignore-mode
-    matlab-mode
-    solarized-theme
-    org))
+(use-package smex
+  :ensure t)
 
-;; Install packages
+(use-package flycheck
+  :ensure t)
 
-(defun elpa-packages-installed-p ()
-  (loop for p in my-packages
-        when (not (package-installed-p p)) do (return nil)
-        finally (return t)))
+(use-package unicode-fonts
+  :ensure t)
 
-(unless (elpa-packages-installed-p)
-  (package-refresh-contents)
-  (dolist (p my-packages)
-    (when (not (package-installed-p p))
-      (package-install p))))
+(use-package ace-jump-mode
+  :ensure t)
+
+(use-package ag
+  :ensure t)
+
+(use-package multiple-cursors
+  :ensure t)
+
+(use-package reveal-in-osx-finder
+  :ensure t)
+
+(use-package paredit
+  :ensure t)
+
+(use-package god-mode
+  :ensure t)
+
+(use-package elisp-slime-nav
+  :ensure t)
+
+(use-package goto-last-change
+  :ensure t)
+
+(use-package exec-path-from-shell
+  :ensure t)
+
 
 ;; Packages in .emacs.d
 
 (defvar packages
-  '(god-mode
-    paredit
-    exec-path-from-shell
-    haskell-mode
-    goto-last-change
-    ace-jump-mode
-    markdown-mode
-    pandoc-mode
-    elisp-slime-nav
-    lpaste
-    echo-keys
-    align-by-current-symbol
-    s
-    hide-region
-    projects-mode
-    smex
-    ag
-    goto-last-point
-    github-urls
-    hamlet-mode
-    number
-    multiple-cursors
-    flycheck
-    reveal-in-finder
-    idris-mode
-    expand-region
-    jonprl-mode
+  '(lpaste
     ;; who knows?
     )
   "Packages whose location follows the
   packages/package-name/package-name.el format.")
 
 (defvar custom-load-paths
-  '("structured-haskell-mode/elisp"
-    "hindent/elisp"
-    "git-modes")
+  '("hindent/elisp")
   "Custom load paths that don't follow the normal
   package-name/module-name.el format.")
 
@@ -82,15 +71,12 @@
   '("osx"
     "global"
     "god"
-    "w3m"
     "agda"
-    "coq"
     "haskell"
     "lisp"
-    "markdown"
-    "python"
-    "tex"
-    "org")
+    "writing"
+    "magit"
+    "HOL")
   "Configuration files that follow the config/foo.el file path
   format.")
 
@@ -103,18 +89,17 @@
                               "packages/"
                               location)))
 
-(add-to-list 'load-path "/usr/local/opt/coq/lib/emacs/site-lisp")
-(load-file (concat (file-name-directory load-file-name)
-                   "packages/ProofGeneral/generic/proof-site.el"))
-
-(loop for name in packages
-      do (progn (unless (fboundp name)
-                  (add-to-list 'load-path
-                               (concat (file-name-directory (or load-file-name
-                                                                (buffer-file-name)))
-                                       "packages/"
-                                       (symbol-name name)))
-                  (require name))))
+(loop
+ for name in packages do
+ (progn
+   (unless (fboundp name)
+     (add-to-list
+      'load-path
+      (concat
+       (file-name-directory (or load-file-name (buffer-file-name)))
+       "packages/"
+       (symbol-name name)))
+     (require name))))
 
 ;; Emacs configurations
 
@@ -123,10 +108,9 @@
                        "config/"
                        name ".el")))
 
-;; Mode initializations
+;; Start server
 
-(god-mode)
-(goto-last-point-mode)
+(server-start)
 
 ;; Custom space
 
@@ -135,6 +119,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(TeX-view-program-selection
+   (quote
+    ((output-dvi "open")
+     (output-pdf "Preview.app")
+     (output-html "open"))))
  '(agda2-include-dirs (quote ("/Users/adam/local/agda-stdlib/src" ".")))
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
@@ -142,10 +131,13 @@
  '(browse-url-generic-args nil)
  '(calendar-week-start-day 1)
  '(company-ghc-show-info t)
+ '(confirm-kill-emacs (quote y-or-n-p))
  '(custom-enabled-themes (quote (solarized-light)))
  '(custom-safe-themes
    (quote
     ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" default)))
+ '(ghc-location "~/src/ghc/strict/")
+ '(ghc-source-location "~/src/ghc/strict/")
  '(haskell-interactive-mode-eval-pretty nil)
  '(haskell-interactive-mode-include-file-name nil)
  '(haskell-notify-p t)
@@ -158,16 +150,22 @@
  '(haskell-process-suggest-haskell-docs-imports t)
  '(haskell-process-suggest-hoogle-imports nil)
  '(haskell-process-suggest-remove-import-lines nil)
- '(haskell-process-type (quote cabal-repl))
+ '(haskell-process-type (quote auto))
  '(haskell-process-use-presentation-mode t)
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save nil)
  '(hindent-process-path
-   "/Users/adam/Code/emacs.d/packages/hindent/.stack-work/install/x86_64-osx/lts-2.9/7.8.4/bin/hindent")
- '(hindent-style "chris-done")
+   "/Users/adam/.emacs.d/packages/hindent/.stack-work/install/x86_64-osx/lts-3.7/7.10.2/bin/hindent")
+ '(hindent-style "johan-tibell")
  '(ispell-dictionary "en_GB-ise")
  '(jonprl-path "/Users/adam/local/JonPRL/bin/jonprl")
  '(org-agenda-files (quote ("~/Org/todo.org")))
+ '(org-file-apps
+   (quote
+    ((auto-mode . emacs)
+     ("\\.mm\\'" . default)
+     ("\\.x?html?\\'" . default)
+     ("\\.pdf\\'" . "open -a /Applications/Preview.app %s"))))
  '(org-html-head
    "<style type=\"text/css\">.figure {text-align:center;
          width: 50%;
@@ -305,11 +303,18 @@ margin-left: auto;
 margin-right: auto;
 max-width: 100%;
 }</style>")
+ '(org-latex-pdf-process
+   (quote
+    ("latexmk -pdf -interaction=nonstopmode -output-directory=%o %f")))
  '(org-startup-truncated nil)
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(safe-local-variable-values
    (quote
-    ((haskell-process-type . stack-ghci)
+    ((haskell-process-type quote ghci)
+     (haskell-process-args-ghci "--interactive" "-package" "ghc")
+     (haskell-process-path-ghci . "~/src/ghc/strict/inplace/bin/ghc-stage2")
+     (ghc-dev-mode . t)
+     (haskell-process-type . stack-ghci)
      (haskell-process-args-ghci "ghci")
      (haskell-process-path-ghci . "stack")
      (haskell-process-type . ghci)
@@ -325,12 +330,17 @@ max-width: 100%;
  '(shm-auto-insert-bangs t)
  '(shm-auto-insert-skeletons t)
  '(shm-use-hdevtools nil)
- '(shm-use-presentation-mode t))
+ '(shm-use-presentation-mode t)
+ '(sml-electric-pipe-mode nil)
+ '(sml-indent-args 2)
+ '(sml-indent-level 2)
+ '(sml-rightalign-and nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(erc-my-nick-face ((t (:foreground "#dca3a3" :weight bold))))
+ '(haskell-literate-comment-face ((t (:inherit font-lock-variable-name-face))))
  '(shm-current-face ((t (:background "#eee8d5"))))
  '(shm-quarantine-face ((t (:background "Lemonchiffon1")))))
