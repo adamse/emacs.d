@@ -49,10 +49,11 @@
 (use-package haskell-mode
   :ensure t
   :bind
-  (("C-c C-u" . haskell-insert-undefined)
+  (:map haskell-mode-map
+   ("C-c C-u" . haskell-insert-undefined)
    ("C-c C-a" . haskell-insert-doc)
 
-   ;; :map interactive-haskell-mode-map
+   ;; interactive-haskell-mode
    ("C-`" . haskell-interactive-bring)
    ("C-c C-t" . haskell-process-do-type)
    ("C-c c" . haskell-process-cabal)
@@ -64,14 +65,14 @@
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
   (use-package haskell-interactive-mode
-    :demand
     :bind
-    (("C-c c" . haskell-process-cabal)))
+    (:map haskell-interactive-mode-map
+     ("C-c c" . haskell-process-cabal)))
 
   (use-package hindent
+    :demand
     :bind
-    (:map
-     haskell-mode-map
-     ("C-c i" . hindent/reformat-dec))))
+    (:map haskell-mode-map
+     ("M-q" . hindent-reformat-decl-or-fill))))
 
 (use-package ghc-dev-mode)

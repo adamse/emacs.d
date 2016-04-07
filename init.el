@@ -52,6 +52,8 @@
 (use-package exec-path-from-shell
   :ensure t)
 
+(use-package gist
+  :ensure t)
 
 ;; Packages in .emacs.d
 
@@ -155,7 +157,7 @@
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save nil)
  '(hindent-process-path
-   "/Users/adam/.emacs.d/packages/hindent/.stack-work/install/x86_64-osx/lts-3.7/7.10.2/bin/hindent")
+   "/Users/adam/.emacs.d/packages/hindent/.stack-work/install/x86_64-osx/nightly-2015-12-11/7.10.2/bin/hindent")
  '(hindent-style "johan-tibell")
  '(ispell-dictionary "en_GB-ise")
  '(jonprl-path "/Users/adam/local/JonPRL/bin/jonprl")
