@@ -68,26 +68,30 @@
   package-name/module-name.el format.")
 
 (defvar configs
-  '("osx"
+  '("HOL"
+    "agda"
     "global"
     "god"
-    "agda"
     "haskell"
     "lisp"
-    "writing"
     "magit"
-    "HOL")
+    "osx"
+    "writing")
   "Configuration files that follow the config/foo.el file path
   format.")
 
 ;; Load packages
 
-(loop for location in custom-load-paths
-      do (add-to-list 'load-path
-                      (concat (file-name-directory (or load-file-name
-                                                       (buffer-file-name)))
-                              "packages/"
-                              location)))
+(loop
+ for location in custom-load-paths do
+ (add-to-list
+  'load-path
+  (concat
+   (file-name-directory
+    (or load-file-name
+        (buffer-file-name)))
+   "packages/"
+   location)))
 
 (loop
  for name in packages do

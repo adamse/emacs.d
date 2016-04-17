@@ -11,10 +11,6 @@
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
 (use-package org
-  :ensure t
-  :bind
-  (("RET" . newline-and-indent))
-
   :config
   (add-hook 'org-mode-hook 'flyspell-mode)
   )
