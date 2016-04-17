@@ -2,8 +2,6 @@
 
 (require 'uniquify)
 (require 'org-agenda)
-;; (require 'ielm)
-;; (require 'expand-region)
 (require 'flyspell)
 (require 'unicode-fonts)
 
@@ -240,10 +238,6 @@ prefix argument."
 
 ;; Auto-loads
 
-;; (add-to-list 'auto-mode-alist (cons "\\.hs\\'" 'haskell-mode))
-;; (add-to-list 'auto-mode-alist (cons "\\.cabal\\'" 'haskell-cabal-mode))
-;; (add-to-list 'auto-mode-alist '("\\.hcr\\'" . haskell-core-mode))
-
 (add-to-list 'auto-mode-alist (cons "\\.el\\'" 'emacs-lisp-mode))
 
 (add-to-list 'auto-mode-alist (cons "\\.md\\'" 'markdown-mode))
@@ -259,34 +253,12 @@ prefix argument."
 (set-fontset-font "fontset-default" 'unicode "PragmataPro")
 ;(set-fontset-font "fontset-default" 'unicode "Symbola")
 
-(defface esk-paren-face
-  '((((class color) (background dark))
-     (:foreground "grey50"))
-    (((class color) (background light))
-     (:foreground "#bbbbbb")))
-  "Face used to dim parentheses."
-  :group 'starter-kit-faces)
-
-(defface dark-paren-face
-  '((((class color) (background dark))
-     (:foreground "#ffffff"))
-    (((class color) (background light))
-     (:foreground "#000000")))
-  "Face used to darken parentheses."
-  :group 'starter-kit-faces)
-
-;; Change lambda to an actual lambda symbol
-(mapc (lambda (major-mode)
-        (font-lock-add-keywords
-         major-mode
-         '(("(\\|)\\|\\[\\|\\]" . 'esk-paren-face))))
-      '(emacs-lisp-mode haskell-mode))
-
 ;; Fix emoji
 (setq unicode-fonts-block-font-mapping
       '(("Emoticons"
 	 ("Apple Color Emoji" "Symbola" "Quivira")))
       unicode-fonts-fontset-names '("fontset-default"))
+
 (unicode-fonts-setup)
 
 ;; Uniquify
