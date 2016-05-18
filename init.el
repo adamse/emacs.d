@@ -68,8 +68,8 @@
   package-name/module-name.el format.")
 
 (defvar configs
-  '("HOL"
-    "agda"
+  '("agda"
+    "HOL"
     "global"
     "god"
     "haskell"
@@ -118,5 +118,5 @@
 
 ;; Custom space
 
-(setq custom-file "custom-variables.el")
+(setq custom-file "~/.emacs.d/custom-variables.el")
 (load custom-file)

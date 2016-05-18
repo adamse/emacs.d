@@ -1,8 +1,11 @@
 ;; Agda
 
+(require 'cl)
+
 (defvar agda-mode-directory
-  (let ((coding-system-for-read 'utf-8))
-    (file-name-directory (shell-command-to-string "agda-mode locate"))))
+  "/Users/adam/local/agda/.stack-work/install/x86_64-osx/lts-5.12/7.10.3/share/x86_64-osx-ghc-7.10.3/Agda-2.5.1/emacs-mode/"
+  ;; (file-name-directory (shell-command-to-string "agda-mode locate"))
+  "Location of Agda emacs mode")
 
 (add-to-list 'load-path agda-mode-directory)
 
@@ -14,8 +17,8 @@
    ("s-]" . agda2-goto-definition-keyboard)
    ("s-[" . agda2-go-back)
    ))
-
 ;;; make available
 (use-package agda-input)
+(use-package eri)
 
 (provide 'agda)

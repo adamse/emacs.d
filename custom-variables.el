@@ -3,7 +3,6 @@
 ;; Copyright (c) 2016 Adam Sandberg Eriksson. All rights reserved.
 
 ;;; Code:
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -47,7 +46,9 @@
  '(hindent-process-path
    "/Users/adam/.emacs.d/packages/hindent/.stack-work/install/x86_64-osx/nightly-2015-12-11/7.10.2/bin/hindent")
  '(hindent-style "johan-tibell")
+ '(ido-file-extensions-order (quote (".tex")))
  '(ispell-dictionary "en_GB-ise")
+ '(ispell-program-name "aspell")
  '(jonprl-path "/Users/adam/local/JonPRL/bin/jonprl")
  '(org-agenda-files (quote ("~/Org/todo.org")))
  '(org-file-apps
