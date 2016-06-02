@@ -1,6 +1,14 @@
-(defun lpaste-region (beg end)
-  "Paste the region to lpaste.net."
-  (interactive "r")
+;;; lpaste.el
+
+(defgroup lpaste nil "lpaste" :prefix lpaste)
+
+(defcustom lpaste-author ""
+  "Author"
+  :type 'string
+  :group 'lpaste)
+
+(defun lpaste-send (paste-data)
+  "Paste paste-data to lpaste.net."
   (let ((response
          (shell-command-to-string
           (format "curl -D/dev/stdout \"http://lpaste.net/new?%s\""
@@ -18,7 +26,7 @@
                                                             (t
                                                              "")))
                                        ("channel" . "")
-                                       ("paste" . ,(buffer-substring-no-properties beg end))
+                                       ("paste" . ,paste-data)
                                        ("private" . "private")
                                        ("email" . "")))
                              "&")))))
@@ -26,5 +34,15 @@
       (message "%S" (match-string 1 response))
       (browse-url (concat "http://lpaste.net/"
                           (match-string 1 response))))))
+
+(defun lpaste-region (beg end)
+  "Paste the region to lpaste.net."
+  (interactive "r")
+  (lpaste-send (buffer-substring-no-properties beg end)))
+
+(defun lpaste-buffer ()
+  "Paste buffer to lpaste.net."
+  (interactive)
+  (lpaste-send (buffer-substring-no-properties (point-min) (point-max))))
 
 (provide 'lpaste)
