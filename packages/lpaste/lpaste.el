@@ -1,6 +1,6 @@
 ;;; lpaste.el
 
-(defgroup lpaste nil "lpaste" :prefix lpaste)
+(defgroup lpaste nil "lpaste" :prefix 'lpaste)
 
 (defcustom lpaste-author ""
   "Author"
