@@ -46,10 +46,13 @@
  '(hindent-process-path
    "/Users/adam/.emacs.d/packages/hindent/.stack-work/install/x86_64-osx/nightly-2015-12-11/7.10.2/bin/hindent")
  '(hindent-style "johan-tibell")
- '(ido-file-extensions-order (quote (".tex")))
+ '(ido-default-buffer-method (quote selected-window))
+ '(ido-default-file-method (quote selected-window))
+ '(ido-file-extensions-order (quote (".lagda" ".tex")))
  '(ispell-dictionary "en_GB-ise")
  '(ispell-program-name "aspell")
  '(jonprl-path "/Users/adam/local/JonPRL/bin/jonprl")
+ '(lpaste-author "adamse")
  '(org-agenda-files (quote ("~/Org/todo.org")))
  '(org-file-apps
    (quote
