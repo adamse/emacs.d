@@ -15,7 +15,7 @@
   (interactive)
   (deactivate-mark)
   (move-beginning-of-line nil)
-  (skip-chars-forward " \\\\(")
+  (skip-chars-forward " \\\\(>-")
   (push-mark)
   (move-end-of-line nil)
   ;; (skip-chars-backward ")")
