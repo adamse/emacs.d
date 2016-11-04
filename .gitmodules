@@ -1,6 +1,7 @@
 [submodule "packages/hindent"]
 	path = packages/hindent
 	url = http://github.com/chrisdone/hindent.git
+	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
 [submodule "packages/company-coq"]
 	path = packages/company-coq
 	url = https://github.com/cpitclaudel/company-coq.git

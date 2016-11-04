@@ -63,6 +63,7 @@
   :config
   (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+  (add-hook 'haskell-mode-hook 'hindent-mode)
 
   (use-package haskell-interactive-mode
     :bind
@@ -71,8 +72,9 @@
 
   (use-package hindent
     :demand
-    :bind
-    (:map haskell-mode-map
-     ("M-q" . hindent-reformat-decl-or-fill))))
+    ;; :bind
+    ;; (:map haskell-mode-map
+    ;;  ("M-q" . hindent-reformat-decl-or-fill))
+    ))
 
 (use-package ghc-dev-mode)
