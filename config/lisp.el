@@ -59,11 +59,11 @@ if the symbol is -foo, then expand to module-name-foo."
            (replace-regexp-in-string
             "\\.el$" ""
             (file-name-nondirectory (buffer-file-name)))))
-      (insert (format ";;; %s.el --- $DESC$
+      (insert (format ";;;; %s.el --- $DESC$
 
-;; Copyright (c) 2016 Adam Sandberg Eriksson. All rights reserved.
+;;;; Copyright (c) 2016 Adam Sandberg Eriksson. All rights reserved.
 
-;;; Code:
+;;;; Code:
 
 %s
 

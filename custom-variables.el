@@ -43,16 +43,21 @@
  '(haskell-process-use-presentation-mode t)
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save nil)
- '(hindent-process-path
-   "/Users/adam/.emacs.d/packages/hindent/.stack-work/install/x86_64-osx/nightly-2015-12-11/7.10.2/bin/hindent")
+ '(hindent-line-length 120)
+ '(hindent-process-path "hindent")
+ '(hindent-reformat-buffer-on-save nil)
  '(hindent-style "johan-tibell")
  '(ido-default-buffer-method (quote selected-window))
  '(ido-default-file-method (quote selected-window))
  '(ido-file-extensions-order (quote (".lagda" ".tex")))
+ '(ido-ignore-files
+   (quote
+    ("\\.dyn_hi$" "\\.dyn_o$" "\\.hi$" "\\.o$" "\\.tags$" "^\\.ghci$" "\\.agdai$" "\\.ibc$")))
  '(ispell-dictionary "en_GB-ise")
  '(ispell-program-name "aspell")
  '(jonprl-path "/Users/adam/local/JonPRL/bin/jonprl")
  '(lpaste-author "adamse")
+ '(mouse-wheel-progressive-speed nil)
  '(org-agenda-files (quote ("~/Org/todo.org")))
  '(org-file-apps
    (quote
@@ -225,6 +230,9 @@ max-width: 100%;
     ("latexmk -pdf -interaction=nonstopmode -output-directory=%o %f")))
  '(org-startup-truncated nil)
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
+ '(package-selected-packages
+   (quote
+    (haskell-mode writegood-mode w3m use-package unicode-fonts solarized-theme sml-mode smex reveal-in-osx-finder paredit org-trello org multiple-cursors matlab-mode markdown-mode magit idris-mode goto-last-change god-mode gitignore-mode gitconfig-mode gist flycheck exec-path-from-shell erlang emmet-mode elisp-slime-nav company-ghc company-coq auctex ag ace-jump-mode)))
  '(safe-local-variable-values
    (quote
     ((haskell-process-type quote ghci)
@@ -243,6 +251,7 @@ max-width: 100%;
      (haskell-indent-spaces . 2)
      (haskell-process-type . cabal-repl)
      (shm-lambda-indent-style . leftmost-parent))))
+ '(scroll-step 1)
  '(send-mail-function (quote smtpmail-send-it))
  '(shm-auto-insert-bangs t)
  '(shm-auto-insert-skeletons t)
@@ -251,7 +260,8 @@ max-width: 100%;
  '(sml-electric-pipe-mode nil)
  '(sml-indent-args 2)
  '(sml-indent-level 2)
- '(sml-rightalign-and nil))
+ '(sml-rightalign-and nil)
+ '(unicode-fonts-fallback-font-list (quote ("Apple Color Emoji" "Symbola" "Quivira"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
