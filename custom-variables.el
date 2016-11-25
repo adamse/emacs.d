@@ -8,10 +8,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(TeX-view-program-list nil)
  '(TeX-view-program-selection
    (quote
     ((output-dvi "open")
-     (output-pdf "Preview.app")
+     (output-pdf "displayline")
      (output-html "open"))))
  '(agda2-include-dirs (quote ("/Users/adam/local/agda-stdlib/src" ".")))
  '(ansi-color-faces-vector
@@ -232,7 +233,7 @@ max-width: 100%;
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(package-selected-packages
    (quote
-    (haskell-mode writegood-mode w3m use-package unicode-fonts solarized-theme sml-mode smex reveal-in-osx-finder paredit org-trello org multiple-cursors matlab-mode markdown-mode magit idris-mode goto-last-change god-mode gitignore-mode gitconfig-mode gist flycheck exec-path-from-shell erlang emmet-mode elisp-slime-nav company-ghc company-coq auctex ag ace-jump-mode)))
+    (racket-mode haskell-mode writegood-mode w3m use-package unicode-fonts solarized-theme sml-mode smex reveal-in-osx-finder paredit org-trello org multiple-cursors matlab-mode markdown-mode magit idris-mode goto-last-change god-mode gitignore-mode gitconfig-mode gist flycheck exec-path-from-shell erlang emmet-mode elisp-slime-nav company-ghc company-coq auctex ag ace-jump-mode)))
  '(safe-local-variable-values
    (quote
     ((haskell-process-type quote ghci)
