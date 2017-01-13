@@ -27,7 +27,7 @@
    (quote
     ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" default)))
  '(ghc-location "~/src/ghc/strict/")
- '(ghc-source-location "~/src/ghc/strict/")
+ '(ghc-source-location "~/src/ghc/ghc/")
  '(haskell-interactive-mode-eval-pretty nil)
  '(haskell-interactive-mode-include-file-name nil)
  '(haskell-notify-p t)
@@ -44,8 +44,8 @@
  '(haskell-process-use-presentation-mode t)
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save nil)
- '(hindent-line-length 120)
- '(hindent-process-path "hindent")
+ '(hindent-process-path
+   "/Users/adam/.emacs.d/packages/hindent/.stack-work/install/x86_64-osx/lts-6.10/7.10.3/bin/hindent")
  '(hindent-reformat-buffer-on-save nil)
  '(hindent-style "johan-tibell")
  '(ido-default-buffer-method (quote selected-window))
@@ -262,6 +262,7 @@ max-width: 100%;
  '(sml-indent-args 2)
  '(sml-indent-level 2)
  '(sml-rightalign-and nil)
+ '(standard-indent 2)
  '(unicode-fonts-fallback-font-list (quote ("Apple Color Emoji" "Symbola" "Quivira"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -58,6 +58,9 @@
    ("C-c C-t" . haskell-process-do-type)
    ("C-c c" . haskell-process-cabal)
    ("C-c C-c" . haskell-process-cabal-build)
+
+   :map haskell-presentation-mode-map
+   ("C-q" . quit-window)
    )
 
   :config

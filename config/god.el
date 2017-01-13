@@ -25,10 +25,12 @@
   (add-hook 'god-mode-enabled-hook 'god-update-cursor)
   (add-hook 'god-mode-disabled-hook 'god-update-cursor)
   (add-hook 'overwrite-mode-hook 'god-toggle-on-overwrite)
+
   (add-to-list 'god-exempt-major-modes 'message-mode)
   (add-to-list 'god-exempt-major-modes 'debugger-mode)
   (add-to-list 'god-exempt-major-modes 'haskell-presentation-mode)
   (add-to-list 'god-exempt-major-modes 'Custom-mode)
+  (add-to-list 'god-exempt-major-modes 'completion-list-mode)
 
   (god-mode)
   )

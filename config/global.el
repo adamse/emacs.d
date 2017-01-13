@@ -123,7 +123,7 @@ prefix argument."
 
 (global-set-key (kbd "s-s") 'save-window-config)
 (global-set-key (kbd "s-g") 'exit-recursive-edit)
-(global-set-key (kbd "s-u") 'winner-mode-undo)
+;; (global-set-key (kbd "s-u") 'winner-mode-undo)
 
 (global-set-key (kbd "M-z") 'zap-up-to-char-repeatable)
 (global-set-key (kbd "M-Q") 'unfill-paragraph)
@@ -145,6 +145,7 @@ prefix argument."
 (global-set-key (kbd "<right>") 'windmove-right)
 (global-set-key (kbd "<up>") 'windmove-up)
 (global-set-key (kbd "<down>") 'windmove-down)
+(global-set-key (kbd "s-§") 'other-frame)
 
 (global-set-key (kbd "<s-left>") 'windmove-left)
 (global-set-key (kbd "<s-right>") 'windmove-right)

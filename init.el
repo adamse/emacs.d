@@ -58,7 +58,8 @@
 ;; Packages in .emacs.d
 
 (defvar packages
-  '(lpaste)
+  '(lpaste
+    ghc-dev-mode)
   "Packages whose location follows the
   packages/package-name/package-name.el format.")
 
