@@ -233,7 +233,8 @@ max-width: 100%;
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(package-selected-packages
    (quote
-    (racket-mode haskell-mode writegood-mode w3m use-package unicode-fonts solarized-theme sml-mode smex reveal-in-osx-finder paredit org-trello org multiple-cursors matlab-mode markdown-mode magit idris-mode goto-last-change god-mode gitignore-mode gitconfig-mode gist flycheck exec-path-from-shell erlang emmet-mode elisp-slime-nav company-ghc company-coq auctex ag ace-jump-mode)))
+    (ediprolog racket-mode haskell-mode writegood-mode w3m use-package unicode-fonts solarized-theme sml-mode smex reveal-in-osx-finder paredit org-trello org multiple-cursors matlab-mode markdown-mode magit idris-mode goto-last-change god-mode gitignore-mode gitconfig-mode gist flycheck exec-path-from-shell erlang emmet-mode elisp-slime-nav company-ghc company-coq auctex ag ace-jump-mode)))
+ '(prolog-system (quote swi))
  '(safe-local-variable-values
    (quote
     ((haskell-process-type quote ghci)
