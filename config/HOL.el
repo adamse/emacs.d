@@ -10,16 +10,29 @@
 
 (load "~/src/cakeml/HOL/tools/hol-mode.el")
 
-(defun hol-eval-line-tactic ()
-  "Highlights and evaluates the current line as a tactic in the HOL buffer."
+(defun hol-mark-line-tactic ()
+  "Marks the tactic at current line"
   (interactive)
   (deactivate-mark)
   (move-beginning-of-line nil)
-  (skip-chars-forward " \\\\(>-")
-  (push-mark)
-  (move-end-of-line nil)
-  ;; (skip-chars-backward ")")
-  (setq mark-active t)
+  (skip-chars-forward " \\\\>-")        ; skip chaining tacticts
+  (let ((end-line)))
+  (if (and (looking-at "(")
+           (= (line-number-at-pos)
+              (save-excursion (forward-list)
+                              (line-number-at-pos))))
+      (progn
+        (push-mark)
+        (forward-list))
+    (forward-char)
+    (push-mark)
+    (move-end-of-line nil))
+  (setq mark-active t))
+
+(defun hol-eval-line-tactic ()
+  "Highlights and evaluates the current line as a tactic in the HOL buffer."
+  (interactive)
+  (hol-mark-line-tactic)
   (copy-region-as-hol-tactic (region-beginning) (region-end) nil))
 
 (define-key sml-mode-map (kbd "TAB") 'eri-indent)
