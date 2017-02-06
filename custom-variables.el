@@ -17,15 +17,23 @@
  '(agda2-include-dirs (quote ("/Users/adam/local/agda-stdlib/src" ".")))
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
  '(browse-url-browser-function (quote browse-url-default-macosx-browser))
  '(browse-url-generic-args nil)
  '(calendar-week-start-day 1)
  '(company-ghc-show-info t)
+ '(compilation-message-face (quote default))
  '(confirm-kill-emacs (quote y-or-n-p))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#657b83")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
  '(custom-enabled-themes (quote (solarized-light)))
  '(custom-safe-themes
    (quote
-    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" default)))
+    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" default)))
+ '(fci-rule-color "#eee8d5")
  '(ghc-location "~/src/ghc/strict/")
  '(ghc-source-location "~/src/ghc/ghc/")
  '(haskell-interactive-mode-eval-pretty nil)
@@ -44,10 +52,33 @@
  '(haskell-process-use-presentation-mode t)
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save nil)
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#fdf6e3" 0.25)
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#586e75")
+ '(highlight-tail-colors
+   (quote
+    (("#eee8d5" . 0)
+     ("#B4C342" . 20)
+     ("#69CABF" . 30)
+     ("#69B7F0" . 50)
+     ("#DEB542" . 60)
+     ("#F2804F" . 70)
+     ("#F771AC" . 85)
+     ("#eee8d5" . 100))))
  '(hindent-process-path
    "/Users/adam/.emacs.d/packages/hindent/.stack-work/install/x86_64-osx/lts-6.10/7.10.3/bin/hindent")
  '(hindent-reformat-buffer-on-save nil)
  '(hindent-style "johan-tibell")
+ '(hl-bg-colors
+   (quote
+    ("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342")))
+ '(hl-fg-colors
+   (quote
+    ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
  '(ido-default-buffer-method (quote selected-window))
  '(ido-default-file-method (quote selected-window))
  '(ido-file-extensions-order (quote (".lagda" ".tex")))
@@ -58,7 +89,11 @@
  '(ispell-program-name "aspell")
  '(jonprl-path "/Users/adam/local/JonPRL/bin/jonprl")
  '(lpaste-author "adamse")
+ '(magit-diff-use-overlays nil)
  '(mouse-wheel-progressive-speed nil)
+ '(nrepl-message-colors
+   (quote
+    ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(org-agenda-files (quote ("~/Org/todo.org")))
  '(org-file-apps
    (quote
@@ -234,6 +269,8 @@ max-width: 100%;
  '(package-selected-packages
    (quote
     (ediprolog racket-mode haskell-mode writegood-mode w3m use-package unicode-fonts solarized-theme sml-mode smex reveal-in-osx-finder paredit org-trello org multiple-cursors matlab-mode markdown-mode magit idris-mode goto-last-change god-mode gitignore-mode gitconfig-mode gist flycheck exec-path-from-shell erlang emmet-mode elisp-slime-nav company-ghc company-coq auctex ag ace-jump-mode)))
+ '(pos-tip-background-color "#eee8d5")
+ '(pos-tip-foreground-color "#586e75")
  '(prolog-system (quote swi))
  '(safe-local-variable-values
    (quote
@@ -259,12 +296,45 @@ max-width: 100%;
  '(shm-auto-insert-skeletons t)
  '(shm-use-hdevtools nil)
  '(shm-use-presentation-mode t)
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
  '(sml-electric-pipe-mode nil)
  '(sml-indent-args 2)
  '(sml-indent-level 2)
  '(sml-rightalign-and nil)
  '(standard-indent 2)
- '(unicode-fonts-fallback-font-list (quote ("Apple Color Emoji" "Symbola" "Quivira"))))
+ '(term-default-bg-color "#fdf6e3")
+ '(term-default-fg-color "#657b83")
+ '(unicode-fonts-fallback-font-list (quote ("Apple Color Emoji" "Symbola" "Quivira")))
+ '(vc-annotate-background nil)
+ '(vc-annotate-background-mode nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#dc322f")
+     (40 . "#c85d17")
+     (60 . "#be730b")
+     (80 . "#b58900")
+     (100 . "#a58e00")
+     (120 . "#9d9100")
+     (140 . "#959300")
+     (160 . "#8d9600")
+     (180 . "#859900")
+     (200 . "#669b32")
+     (220 . "#579d4c")
+     (240 . "#489e65")
+     (260 . "#399f7e")
+     (280 . "#2aa198")
+     (300 . "#2898af")
+     (320 . "#2793ba")
+     (340 . "#268fc6")
+     (360 . "#268bd2"))))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   (quote
+    (unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496")))
+ '(xterm-color-names
+   ["#eee8d5" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#073642"])
+ '(xterm-color-names-bright
+   ["#fdf6e3" "#cb4b16" "#93a1a1" "#839496" "#657b83" "#6c71c4" "#586e75" "#002b36"]))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

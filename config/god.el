@@ -31,6 +31,7 @@
   (add-to-list 'god-exempt-major-modes 'haskell-presentation-mode)
   (add-to-list 'god-exempt-major-modes 'Custom-mode)
   (add-to-list 'god-exempt-major-modes 'completion-list-mode)
+  (add-to-list 'god-exempt-major-modes 'TeX-output-mode)
 
   (god-mode)
   )

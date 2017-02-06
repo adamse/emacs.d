@@ -16,7 +16,6 @@
   (deactivate-mark)
   (move-beginning-of-line nil)
   (skip-chars-forward " \\\\>-")        ; skip chaining tacticts
-  (let ((end-line)))
   (if (and (looking-at "(")
            (= (line-number-at-pos)
               (save-excursion (forward-list)
@@ -24,7 +23,8 @@
       (progn
         (push-mark)
         (forward-list))
-    (forward-char)
+    (if (looking-at "(")
+        (skip-chars-forward "("))
     (push-mark)
     (move-end-of-line nil))
   (setq mark-active t))
