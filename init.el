@@ -1,3 +1,7 @@
+;; Benchmark load
+;; (add-to-list 'load-path "/Users/adam/.emacs.d/benchmark-init-el")
+;; (require 'benchmark-init-loaddefs)
+;; (benchmark-init/activate)
 ;; Standard libraries needed
 
 (require 'cl)
@@ -7,10 +11,10 @@
 
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
-
 (package-initialize)
 
 ;; Theme
+
 (use-package solarized-theme
   :ensure t)
 
@@ -19,31 +23,25 @@
 (use-package smex
   :ensure t)
 
-(use-package flycheck
-  :ensure t)
+;; (use-package unicode-fonts
+;;   :ensure t)
 
-(use-package unicode-fonts
-  :ensure t)
+;; (use-package ace-jump-mode
+;;   :ensure t)
 
-(use-package ace-jump-mode
-  :ensure t)
+;; (use-package ag
+;;   :ensure t)
 
-(use-package ag
-  :ensure t)
-
-(use-package multiple-cursors
-  :ensure t)
+;; (use-package multiple-cursors
+;;   :ensure t)
 
 (use-package reveal-in-osx-finder
-  :ensure t)
-
-(use-package paredit
-  :ensure t)
-
-(use-package elisp-slime-nav
+  :commands (reveal-in-osx-finder)
   :ensure t)
 
 (use-package goto-last-change
+  :bind (("C-x C-x" . goto-last-change))
+
   :ensure t)
 
 (use-package exec-path-from-shell
@@ -56,7 +54,8 @@
   )
 
 (use-package gist
-  :ensure t)
+  :ensure t
+  :commands (gist-region gist-buffer gist-list))
 
 ;;; God mode
 
@@ -109,11 +108,11 @@
   :mode ("\\.l?agda\\'" . agda2-mode)
   :bind
   (:map agda2-mode-map
-   ("M-n" . agda2-next-goal)
-   ("M-p" . agda2-previous-goal)
-   ("s-]" . agda2-goto-definition-keyboard)
-   ("s-[" . agda2-go-back)
-   ))
+        ("M-n" . agda2-next-goal)
+        ("M-p" . agda2-previous-goal)
+        ("s-]" . agda2-goto-definition-keyboard)
+        ("s-[" . agda2-go-back)
+        ))
 
 (use-package agda-input)
 (use-package eri)
@@ -121,56 +120,15 @@
 ;;; Lpaste
 
 (use-package lpaste
+  :commands (lpaste-buffer lpaste-region)
   :load-path "packages/lpaste/")
-
 
 ;;; Haskell
 
-(defun haskell-insert-doc ()
-  "Insert the documentation syntax."
-  (interactive)
-  (unless (= (line-beginning-position)
-             (line-end-position))
-    (shm/backward-paragraph))
-  (unless (= (line-beginning-position)
-             (line-end-position))
-    (save-excursion (insert "\n")))
-  (insert "-- | "))
-
-(defun haskell-auto-insert-module-template ()
-  "Insert a module template for the newly created buffer."
-  (interactive)
-  (when (and (= (point-min)
-                (point-max))
-             (buffer-file-name))
-    (insert
-     "-- | "
-     "\n"
-     "module "
-     )
-    (let ((name (haskell-guess-module-name)))
-      (if (string= name "")
-          (progn (insert "Main")
-                 (shm-evaporate (- (point) 5)
-                                (point)))
-        (insert name)))
-    (insert " where"
-            "\n"
-            "\n")
-    (goto-char (point-min))
-    (forward-char 4)
-    (god-mode)))
-
-(defun haskell-insert-undefined ()
-  "Insert undefined."
-  (interactive)
-  (if (and (boundp 'structured-haskell-mode)
-           structured-haskell-mode)
-      (shm-insert-string "undefined")
-    (insert "undefined")))
 
 (use-package haskell-mode
   :ensure t
+  :mode "\\.hs\\'"
   :bind
   (:map haskell-mode-map
         ("C-c C-u"	. haskell-insert-undefined)
@@ -197,6 +155,49 @@
     :load-path "packages/hindent/elisp")
   (use-package ghc-dev-mode
     :load-path "packages/ghc-dev-mode")
+
+  (defun haskell-insert-undefined ()
+    "Insert undefined."
+    (interactive)
+    (if (and (boundp 'structured-haskell-mode)
+             structured-haskell-mode)
+        (shm-insert-string "undefined")
+      (insert "undefined")))
+
+  (defun haskell-insert-doc ()
+    "Insert the documentation syntax."
+    (interactive)
+    (unless (= (line-beginning-position)
+               (line-end-position))
+      (shm/backward-paragraph))
+    (unless (= (line-beginning-position)
+               (line-end-position))
+      (save-excursion (insert "\n")))
+    (insert "-- | "))
+
+  (defun haskell-auto-insert-module-template ()
+    "Insert a module template for the newly created buffer."
+    (interactive)
+    (when (and (= (point-min)
+                  (point-max))
+               (buffer-file-name))
+      (insert
+       "-- | "
+       "\n"
+       "module "
+       )
+      (let ((name (haskell-guess-module-name)))
+        (if (string= name "")
+            (progn (insert "Main")
+                   (shm-evaporate (- (point) 5)
+                                  (point)))
+          (insert name)))
+      (insert " where"
+              "\n"
+              "\n")
+      (goto-char (point-min))
+      (forward-char 4)
+      (god-mode)))
   )
 
 ;;; HOL mode
@@ -244,163 +245,21 @@
 
 ;;; Lisp
 
-(defun conditionally-enable-paredit-mode ()
-  "enable paredit-mode during eval-expression"
-  (if (eq this-command 'eval-expression)
-      (paredit-mode 1)))
-
-(defun paredit-delete-indentation ()
-  "Delete indentation and re-indent."
-  (interactive)
-  (delete-indentation)
-  (paredit-reindent-defun))
-
-(defun paredit-backward-delete. ()
-  "A less enraging `paredit-backward-delete'."
-  (interactive)
-  (if (region-active-p)
-      (delete-region (region-beginning)
-                     (region-end))
-    (call-interactively 'paredit-backward-delete)))
-
-(defun emacs-lisp-expand-clever ()
-  "Cleverly expand symbols with normal dabbrev-expand, but also
-if the symbol is -foo, then expand to module-name-foo."
-  (interactive)
-  (if (save-excursion
-        (backward-sexp)
-        (when (looking-at "#?'") (search-forward "'"))
-        (looking-at "-"))
-      (if (eq last-command this-command)
-          (call-interactively 'dabbrev-expand)
-        (let ((module-name (emacs-lisp-module-name)))
-          (progn
-            (save-excursion
-              (backward-sexp)
-              (when (looking-at "#?'") (search-forward "'"))
-              (unless (string= (buffer-substring-no-properties
-                                (point)
-                                (min (point-max) (+ (point) (length module-name))))
-                               module-name)
-                (insert module-name)))
-            (call-interactively 'dabbrev-expand))))
-    (call-interactively 'dabbrev-expand)))
-
-(defun emacs-lisp-module-name ()
-  "Search the buffer for `provide' declaration."
-  (save-excursion
-    (goto-char (point-min))
-    (when (search-forward-regexp "^(provide '" nil t 1)
-      (symbol-name (symbol-at-point)))))
-
-(defun emacs-lisp-module-template ()
-  (interactive)
-  (when (and (buffer-file-name)
-             (= (point-min)
-                (point-max)))
-    (let ((module-name
-           (replace-regexp-in-string
-            "\\.el$" ""
-            (file-name-nondirectory (buffer-file-name)))))
-      (insert (format ";;;; %s.el --- $DESC$
-
-;;;; Copyright (c) 2016 Adam Sandberg Eriksson. All rights reserved.
-
-;;;; Code:
-
-%s
-
-\(provide '%s)" module-name (if (string-match "^shm-" module-name)
-                                "(require 'shm-core)\n\n" "") module-name))
-      (search-backward "$DESC$")
-      (delete-region (point)
-                     (line-end-position)))))
-
-(defun emacs-lisp-return-or-backslash ()
-  "Return to previous point in god-mode."
-  (interactive)
-  (if god-local-mode
-      (call-interactively 'god-mode-self-insert)
-    (call-interactively 'paredit-backslash)))
-
-(defun paredit-kill-sexp ()
-  "Kill the sexp at point."
-  (interactive)
-  (if (eq last-command 'kill-region)
-      (call-interactively 'kill-sexp)
-    (cond
-     ((paredit-in-string-p)
-      (paredit-backward-up)
-      (call-interactively 'kill-sexp))
-     ((paredit-inside-sexp-p)
-      (paredit-backward)
-      (call-interactively 'kill-sexp))
-     ((paredit-start-of-sexp-p)
-      (call-interactively 'kill-sexp))
-     (t
-      (paredit-backward)
-      (call-interactively 'kill-sexp)))))
-
-(defun paredit-delete-sexp ()
-  "Delete the sexp at point."
-  (interactive)
-  (cond
-   ((paredit-in-comment-p)
-    (call-interactively 'delete-char))
-   ;; Strings don't behave the same as normal sexps in paredit.
-   ((paredit-in-string-p)
-    (delete-region (save-excursion (paredit-backward-up)
-                                   (point))
-                   (save-excursion (paredit-backward-up)
-                                   (paredit-forward)
-                                   (point))))
-   ((paredit-inside-sexp-p)
-    (delete-region (save-excursion (paredit-backward)
-                                   (point))
-                   (save-excursion (paredit-forward)
-                                   (point))))
-   ((paredit-start-of-sexp-p)
-    (delete-region (point)
-                   (save-excursion (paredit-forward)
-                                   (point))))
-   ;; Otherwise we're at the end of a sexp.
-   (t
-    (delete-region (save-excursion (paredit-backward)
-                                   (point))
-                   (save-excursion (paredit-backward)
-                                   (paredit-forward)
-                                   (point))))))
-
-(defun paredit-inside-sexp-p ()
-  "Are we inside the bounds of a sexp?"
-  (= (save-excursion (paredit-forward)
-                     (point))
-     (save-excursion (paredit-backward)
-                     (paredit-forward)
-                     (point))))
-
-(defun paredit-start-of-sexp-p ()
-  "Are we at the start of a sexp?"
-  (= (save-excursion (paredit-forward)
-                     (paredit-backward)
-                     (point))
-     (point)))
-
-(defun byte-compile-reload-dir ()
-  "Byte-compile and reload everything."
-  (interactive)
-  (let ((byte-compile-warnings '(free-vars unresolved callargs redefine make-local mapcar constants suspicious)))
-    (loop for file in (directory-files (file-name-directory (or load-file-name
-                                                                (buffer-file-name)))
-                                       nil
-                                       "^[a-z0-9-]+\\.el$")
-          do (byte-recompile-file file t 0 t))))
-
 (use-package emacs-lisp-mode
+  :mode "\\.el\\'"
   :config
   (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
   (add-hook 'emacs-lisp-mode-hook 'emacs-lisp-module-template)
   (add-hook 'minibuffer-setup-hook 'conditionally-enable-paredit-mode)
+
+  (use-package paredit
+    :ensure t)
+
+  (use-package elisp-slime-nav
+    :ensure t)
+
+  (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
+  (add-hook 'ielm-mode-hook 'elisp-slime-nav-mode)
 
   (use-package paredit-mode
     :bind
@@ -413,6 +272,159 @@ if the symbol is -foo, then expand to module-name-foo."
           ("M-^"      . paredit-delete-indentation)
           ("M-a"      . paredit-backward-up)
 	  ))
+
+  (defun conditionally-enable-paredit-mode ()
+    "enable paredit-mode during eval-expression"
+    (if (eq this-command 'eval-expression)
+        (paredit-mode 1)))
+
+  (defun paredit-delete-indentation ()
+    "Delete indentation and re-indent."
+    (interactive)
+    (delete-indentation)
+    (paredit-reindent-defun))
+
+  (defun paredit-backward-delete. ()
+    "A less enraging `paredit-backward-delete'."
+    (interactive)
+    (if (region-active-p)
+        (delete-region (region-beginning)
+                       (region-end))
+      (call-interactively 'paredit-backward-delete)))
+
+  (defun emacs-lisp-expand-clever ()
+    "Cleverly expand symbols with normal dabbrev-expand, but also
+if the symbol is -foo, then expand to module-name-foo."
+    (interactive)
+    (if (save-excursion
+          (backward-sexp)
+          (when (looking-at "#?'") (search-forward "'"))
+          (looking-at "-"))
+        (if (eq last-command this-command)
+            (call-interactively 'dabbrev-expand)
+          (let ((module-name (emacs-lisp-module-name)))
+            (progn
+              (save-excursion
+                (backward-sexp)
+                (when (looking-at "#?'") (search-forward "'"))
+                (unless (string= (buffer-substring-no-properties
+                                  (point)
+                                  (min (point-max) (+ (point) (length module-name))))
+                                 module-name)
+                  (insert module-name)))
+              (call-interactively 'dabbrev-expand))))
+      (call-interactively 'dabbrev-expand)))
+
+  (defun emacs-lisp-module-name ()
+    "Search the buffer for `provide' declaration."
+    (save-excursion
+      (goto-char (point-min))
+      (when (search-forward-regexp "^(provide '" nil t 1)
+        (symbol-name (symbol-at-point)))))
+
+  (defun emacs-lisp-module-template ()
+    (interactive)
+    (when (and (buffer-file-name)
+               (= (point-min)
+                  (point-max)))
+      (let ((module-name
+             (replace-regexp-in-string
+              "\\.el$" ""
+              (file-name-nondirectory (buffer-file-name)))))
+        (insert (format ";;;; %s.el --- $DESC$
+
+;;;; Copyright (c) 2016 Adam Sandberg Eriksson. All rights reserved.
+
+;;;; Code:
+
+%s
+
+\(provide '%s)" module-name (if (string-match "^shm-" module-name)
+                                "(require 'shm-core)\n\n" "") module-name))
+        (search-backward "$DESC$")
+        (delete-region (point)
+                       (line-end-position)))))
+
+  (defun emacs-lisp-return-or-backslash ()
+    "Return to previous point in god-mode."
+    (interactive)
+    (if god-local-mode
+        (call-interactively 'god-mode-self-insert)
+      (call-interactively 'paredit-backslash)))
+
+  (defun paredit-kill-sexp ()
+    "Kill the sexp at point."
+    (interactive)
+    (if (eq last-command 'kill-region)
+        (call-interactively 'kill-sexp)
+      (cond
+       ((paredit-in-string-p)
+        (paredit-backward-up)
+        (call-interactively 'kill-sexp))
+       ((paredit-inside-sexp-p)
+        (paredit-backward)
+        (call-interactively 'kill-sexp))
+       ((paredit-start-of-sexp-p)
+        (call-interactively 'kill-sexp))
+       (t
+        (paredit-backward)
+        (call-interactively 'kill-sexp)))))
+
+  (defun paredit-delete-sexp ()
+    "Delete the sexp at point."
+    (interactive)
+    (cond
+     ((paredit-in-comment-p)
+      (call-interactively 'delete-char))
+     ;; Strings don't behave the same as normal sexps in paredit.
+     ((paredit-in-string-p)
+      (delete-region (save-excursion (paredit-backward-up)
+                                     (point))
+                     (save-excursion (paredit-backward-up)
+                                     (paredit-forward)
+                                     (point))))
+     ((paredit-inside-sexp-p)
+      (delete-region (save-excursion (paredit-backward)
+                                     (point))
+                     (save-excursion (paredit-forward)
+                                     (point))))
+     ((paredit-start-of-sexp-p)
+      (delete-region (point)
+                     (save-excursion (paredit-forward)
+                                     (point))))
+     ;; Otherwise we're at the end of a sexp.
+     (t
+      (delete-region (save-excursion (paredit-backward)
+                                     (point))
+                     (save-excursion (paredit-backward)
+                                     (paredit-forward)
+                                     (point))))))
+
+  (defun paredit-inside-sexp-p ()
+    "Are we inside the bounds of a sexp?"
+    (= (save-excursion (paredit-forward)
+                       (point))
+       (save-excursion (paredit-backward)
+                       (paredit-forward)
+                       (point))))
+
+  (defun paredit-start-of-sexp-p ()
+    "Are we at the start of a sexp?"
+    (= (save-excursion (paredit-forward)
+                       (paredit-backward)
+                       (point))
+       (point)))
+
+  (defun byte-compile-reload-dir ()
+    "Byte-compile and reload everything."
+    (interactive)
+    (let ((byte-compile-warnings '(free-vars unresolved callargs redefine make-local mapcar constants suspicious)))
+      (loop for file in (directory-files (file-name-directory (or load-file-name
+                                                                  (buffer-file-name)))
+                                         nil
+                                         "^[a-z0-9-]+\\.el$")
+            do (byte-recompile-file file t 0 t))))
+
   )
 
 
@@ -420,8 +432,7 @@ if the symbol is -foo, then expand to module-name-foo."
 
 (use-package magit
   :ensure t
-  :init
-
+  :defer
   :bind
   (("C-x g" . magit-status)
    ("C-x M-g" . magit-dispatch-popup))
@@ -430,21 +441,25 @@ if the symbol is -foo, then expand to module-name-foo."
 ;;; writing
 
 (use-package LaTeX-mode
+  :mode "\\.tex\\'"
   :config
+  (use-package flycheck
+    :ensure t)
+
   (add-hook 'LaTeX-mode-hook 'flyspell-mode))
 
 (use-package org
+  :mode "\\.org\\'"
   :config
   (add-hook 'org-mode-hook 'flyspell-mode)
   )
 
-(use-package markdown-mode)
+(use-package markdown-mode
+  :mode "\\.md\\'")
 
 ;; Global config
 
 (require 'uniquify)
-(require 'org-agenda)
-(require 'flyspell)
 (require 'unicode-fonts)
 
 ;; Fundamental functions
@@ -532,7 +547,6 @@ prefix argument."
 (global-set-key (kbd "M-z") 'zap-up-to-char-repeatable)
 (global-set-key (kbd "M-Q") 'unfill-paragraph)
 (global-set-key (kbd "M-g") 'goto-line)
-(global-set-key (kbd "C-x C-x") 'goto-last-change)
 (global-set-key (kbd "C-x C-TAB") 'indent-rigidly)
 (global-set-key (kbd "C-t") 'replace-regexp)
 (global-set-key (kbd "C-z") 'ido-switch-buffer)
@@ -617,15 +631,6 @@ prefix argument."
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'after-save-hook 'auto-chmod)
 (add-hook 'shell-mode-hook 'set-ansi-colors)
-(add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
-(add-hook 'ielm-mode-hook 'elisp-slime-nav-mode)
-
-
-;; Auto-loads
-
-(add-to-list 'auto-mode-alist (cons "\\.el\\'" 'emacs-lisp-mode))
-(add-to-list 'auto-mode-alist (cons "\\.md\\'" 'markdown-mode))
-(add-to-list 'auto-mode-alist (cons "\\.markdown\\'" 'markdown-mode))
 
 ;; Environment settings
 
@@ -635,7 +640,7 @@ prefix argument."
 
 (set-default-font "-apple-PragmataPro-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 (set-fontset-font "fontset-default" 'unicode "PragmataPro")
-;(set-fontset-font "fontset-default" 'unicode "Symbola")
+                                        ;(set-fontset-font "fontset-default" 'unicode "Symbola")
 
 ;; Fix emoji
 (setq unicode-fonts-block-font-mapping
