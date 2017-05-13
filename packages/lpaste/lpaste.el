@@ -32,8 +32,10 @@
                              "&")))))
     (when (string-match "Location: /\\([0-9]+\\)" response)
       (message "%S" (match-string 1 response))
-      (browse-url (concat "http://lpaste.net/"
-                          (match-string 1 response))))))
+      (let ((paste-url (concat "http://lpaste.net/" (match-string 1 response))))
+        (kill-new paste-url)
+        (browse-url paste-url))
+      )))
 
 (defun lpaste-region (beg end)
   "Paste the region to lpaste.net."
